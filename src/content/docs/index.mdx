@@ -1,0 +1,74 @@
+---
+title: ¡Bienvenido(a)!
+description: Aqui va la descripción del proyecto
+template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  tagline: Te damos la bienvenida a este Objeto Virtual de Aprendizaje (OVA), diseñado para fortalecer tus conocimientos sobre las funciones lineales y cuadráticas mediante la resolución de situaciones problema y el uso de actividades interactivas. A lo largo de este recorrido explorarás conceptos, interpretarás representaciones algebraicas y gráficas, y resolverás desafíos utilizando simulaciones de GeoGebra integradas en el OVA. Cada módulo te permitirá aprender de forma dinámica, desarrollar tu razonamiento matemático y aplicar los conocimientos adquiridos a situaciones del contexto. ¡Comienza esta experiencia de aprendizaje y descubre  cómo las funciones te ayudan a comprender el mundo que te rodea!
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: Unidades didacticas
+      link: /unidad/unidad-1/sesion-1/
+      icon: right-arrow
+    #- text: Read the Starlight docs
+     # link: https://starlight.astro.build
+      #icon: external
+      #variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Icon } from '@astrojs/starlight/components';
+
+## Información del curso
+
+<CardGrid stagger>
+  <a
+    href="/bienvenida/caracteristicas/"
+    style="text-decoration: none; color: inherit; display: block;"
+  >
+    <Card title="Características" icon="pencil">
+      Edit `src/content/docs/index.mdx` to see this page change.
+    </Card>
+  </a>
+  <a
+    href="/bienvenida/cronograma/"
+    style="text-decoration: none; color: inherit; display: block;"
+  >
+    <Card title="Cronograma de actividades" icon="document">
+      Delete `template: splash` in `src/content/docs/index.mdx` to display a
+      sidebar on this page.
+    </Card>
+  </a>
+  <a
+    href="/bienvenida/caracteristicas/"
+    style="text-decoration: none; color: inherit; display: block;"
+  >
+    <Card title="Material de apoyo" icon="add-document">
+      Add Markdown or MDX files to `src/content/docs` to create new pages.
+    </Card>
+  </a>
+  <a
+    href="/bienvenida/caracteristicas/"
+    style="text-decoration: none; color: inherit; display: block;"
+  >
+    <Card title="Autores" icon="setting">
+      Edit your `sidebar` and other config in `astro.config.mjs`.
+    </Card>
+  </a>
+  <a
+    href="/bienvenida/caracteristicas/"
+    style="text-decoration: none; color: inherit; display: block;"
+  >
+    <Card title="Secuencia 1" icon="pencil">
+      Funciones lineales: introducción y exploración con GeoGebra
+    </Card>
+  </a>
+  <a
+    href="/evaluacion/postest/"
+    style="text-decoration: none; color: inherit; display: block;"
+  >
+    <Card title="Prueba de salida" icon="pencil">
+      Acceda para realizar el test de salida
+    </Card>
+  </a>
+</CardGrid>

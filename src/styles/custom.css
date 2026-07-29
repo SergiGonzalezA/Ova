@@ -1,0 +1,67 @@
+:root {
+  --sl-content-width: 100rem; /* ancho del contenido central */
+}
+.sl-heading-wrapper .anchor-link {
+  display: none;
+}
+
+.hero .tagline {
+  text-align: justify;
+}
+
+/* ===== Estilos de tabla ===== */
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--sl-color-gray-5);
+}
+
+/* Encabezado */
+table th {
+  background-color: var(--sl-color-accent);
+  color: white;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+/* Celdas del cuerpo */
+table td {
+  padding: 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+}
+
+/* Filas alternadas */
+table tr:nth-child(even) {
+  background-color: var(--sl-color-gray-6);
+}
+
+/* Ancho de columnas */
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 15%; /* Semana */
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 15%; /* Sesión */
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 60%; /* Contenidos y actividades */
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+  width: 10%; /* Duración */
+}
+
+/* Centrado vertical y horizontal para Semana, Sesión y Duración */
+table td:nth-child(1),
+table td:nth-child(2),
+table td:nth-child(4) {
+  text-align: center;
+  vertical-align: middle;
+}
