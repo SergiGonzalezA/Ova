@@ -1,0 +1,466 @@
+---
+// src/components/CaminataSincronizada.astro
+---
+
+<div class="starlight-caminata-card">
+  <div class="caminata-header">
+    <div class="badge-formula">
+      <!-- <span class="label">Modelo:</span>
+      <code id="formula-txt">y = 0.75 · x</code> -->
+    </div>
+    <div class="status-hud">
+      <span>Pasos (<span class="math">x</span>): <strong id="hud-x">0</strong></span>
+      <span class="divider">|</span>
+      <span>Distancia (<span class="math">y</span>): <strong id="hud-y" class="highlight">0.0 m</strong></span>
+    </div>
+  </div>
+
+  <!-- Canvas Unificado -->
+  <div class="canvas-wrapper">
+    <canvas id="simulador-canvas"></canvas>
+  </div>
+
+  <!-- Panel de Control perfectamente alineado -->
+  <div class="caminata-controls">
+    <div class="btn-group">
+      <button id="btn-play-pause" class="btn-control btn-primary">
+        ▶ Iniciar
+      </button>
+      <button id="btn-reiniciar" class="btn-control btn-secondary">
+        ↺ Reiniciar
+      </button>
+    </div>
+
+    <div class="sliders-container">
+      <div class="slider-group">
+        <label for="slider-zancada">
+          Longitud de paso (<span class="math">m</span>): <strong id="lbl-zancada">0.75 m</strong>
+        </label>
+        <input type="range" id="slider-zancada" min="0.30" max="1.20" step="0.05" value="0.75" />
+      </div>
+
+      <div class="slider-group">
+        <label for="slider-velocidad">
+          Velocidad: <strong id="lbl-velocidad">1.0x</strong>
+        </label>
+        <input type="range" id="slider-velocidad" min="0.2" max="2.0" step="0.1" value="1.0" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Reset y contenedor principal */
+  .starlight-caminata-card {
+    background-color: var(--sl-color-gray-6, #18181b);
+    border: 1px solid var(--sl-color-gray-5, #27272a);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    font-family: var(--sl-font-system, sans-serif);
+    box-sizing: border-box;
+  }
+
+  .caminata-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-gray-5, #27272a);
+  }
+
+  .badge-formula .label {
+    font-size: 0.85rem;
+    color: var(--sl-color-gray-3, #a1a1aa);
+    margin-right: 0.4rem;
+  }
+
+  .badge-formula code {
+    background-color: var(--sl-color-gray-5, #27272a);
+    color: var(--sl-color-text-accent, #10b981);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.375rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .status-hud {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-2, #e4e4e7);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .status-hud .highlight {
+    color: #10b981;
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background-color: #0c1427;
+    border-radius: 0.5rem;
+    border: 1px solid var(--sl-color-gray-5, #27272a);
+    overflow: hidden;
+  }
+
+  #simulador-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* --- ALINEACIÓN ESTRUCTURAL DE CONTROLES --- */
+  .caminata-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important; /* Fuerza que botones y sliders se alineen verticalmente al centro */
+    justify-content: space-between !important;
+    gap: 1.25rem !important;
+    margin-top: 1.25rem !important;
+  }
+
+  .btn-group {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Forzar reseteo completo de estilos globales en botones */
+  .btn-group button.btn-control {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    line-height: 1 !important;
+    padding: 0 1.25rem !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.4rem !important;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .btn-group button.btn-primary {
+    background-color: #10b981 !important;
+    color: #042f2e !important;
+    border: 1px solid #10b981 !important;
+  }
+  .btn-group button.btn-primary:hover {
+    background-color: #34d399 !important;
+    border-color: #34d399 !important;
+  }
+
+  .btn-group button.btn-secondary {
+    background-color: var(--sl-color-gray-5, #27272a) !important;
+    color: var(--sl-color-gray-2, #e4e4e7) !important;
+    border: 1px solid var(--sl-color-gray-4, #3f3f46) !important;
+  }
+  .btn-group button.btn-secondary:hover {
+    background-color: var(--sl-color-gray-4, #3f3f46) !important;
+  }
+
+  .sliders-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    margin: 0 !important;
+  }
+
+  .slider-group {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 0.3rem !important;
+    font-size: 0.85rem !important;
+    color: var(--sl-color-gray-3, #a1a1aa) !important;
+    margin: 0 !important;
+  }
+
+  .slider-group input {
+    accent-color: #10b981 !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+  }
+</style>
+
+<script>
+  let animando = false;
+  let pasos = 0;
+  const maxPasos = 100;
+  let m = 0.75;
+  let velocidadFactor = 1.0;
+  let requestID: number | null = null;
+
+  const canvas = document.getElementById('simulador-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const btnPlay = document.getElementById('btn-play-pause') as HTMLButtonElement;
+  const btnReset = document.getElementById('btn-reiniciar') as HTMLButtonElement;
+  const sliderZancada = document.getElementById('slider-zancada') as HTMLInputElement;
+  const sliderVelocidad = document.getElementById('slider-velocidad') as HTMLInputElement;
+  const lblZancada = document.getElementById('lbl-zancada')!;
+  const lblVelocidad = document.getElementById('lbl-velocidad')!;
+  const formulaTxt = document.getElementById('formula-txt')!;
+  const hudX = document.getElementById('hud-x')!;
+  const hudY = document.getElementById('hud-y')!;
+
+  function resizeCanvas() {
+    if (!canvas) return;
+    canvas.width = canvas.parentElement!.clientWidth;
+    canvas.height = canvas.parentElement!.clientHeight;
+    render();
+  }
+  window.addEventListener('resize', resizeCanvas);
+
+  btnPlay.addEventListener('click', () => {
+    animando = !animando;
+    if (animando) {
+      btnPlay.textContent = '❚❚ Pausar';
+      bucleAnimacion();
+    } else {
+      btnPlay.textContent = '▶ Iniciar';
+      if (requestID) cancelAnimationFrame(requestID);
+    }
+  });
+
+  btnReset.addEventListener('click', () => {
+    animando = false;
+    if (requestID) cancelAnimationFrame(requestID);
+    pasos = 0;
+    btnPlay.textContent = '▶ Iniciar';
+    render();
+  });
+
+  sliderZancada.addEventListener('input', (e) => {
+    m = parseFloat((e.target as HTMLInputElement).value);
+    lblZancada.textContent = `${m.toFixed(2)} m`;
+    formulaTxt.textContent = `y = ${m.toFixed(2)} · x`;
+    render();
+  });
+
+  sliderVelocidad.addEventListener('input', (e) => {
+    velocidadFactor = parseFloat((e.target as HTMLInputElement).value);
+    lblVelocidad.textContent = `${velocidadFactor.toFixed(1)}x`;
+  });
+
+  function bucleAnimacion() {
+    if (!animando) return;
+
+    pasos += 0.12 * velocidadFactor;
+
+    if (pasos >= maxPasos) {
+      pasos = maxPasos;
+      animando = false;
+      btnPlay.textContent = '↺ Repetir';
+    }
+
+    render();
+
+    if (animando) {
+      requestID = requestAnimationFrame(bucleAnimacion);
+    }
+  }
+
+  function render() {
+    if (!ctx) return;
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const distancia = pasos * m;
+    hudX.textContent = Math.floor(pasos).toString();
+    hudY.textContent = `${distancia.toFixed(1)} m`;
+
+    const padL = 55, padR = 30, padT = 35, padB = 45;
+    const plotW = w - padL - padR;
+    const plotH = h - padT - padB;
+    const maxDistanciaScale = maxPasos * 1.2;
+
+    const getX = (p: number) => padL + (p / maxPasos) * plotW;
+    const getY = (d: number) => padT + plotH - (d / maxDistanciaScale) * plotH;
+
+    // 1. DIBUJAR FONDO DEL PARQUE
+    // Cielo
+    const cieloGrad = ctx.createLinearGradient(0, 0, 0, padT + plotH);
+    cieloGrad.addColorStop(0, '#090d16');
+    cieloGrad.addColorStop(1, '#111827');
+    ctx.fillStyle = cieloGrad;
+    ctx.fillRect(0, 0, w, padT + plotH);
+
+    // Césped / Fondo verde en el piso (Eje X)
+    ctx.fillStyle = '#064e3b';
+    ctx.fillRect(padL, padT + plotH - 6, plotW, padB + 6);
+
+    // Árboles al fondo
+    for (let x = padL + 20; x < padL + plotW; x += 90) {
+      ctx.fillStyle = '#065f46';
+      ctx.beginPath();
+      ctx.arc(x, padT + plotH - 12, 18, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 2. REJILLA / GRID DEL PLANO
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.lineWidth = 1;
+    for (let p = 0; p <= maxPasos; p += 20) {
+      const cx = getX(p);
+      ctx.beginPath();
+      ctx.moveTo(cx, padT);
+      ctx.lineTo(cx, padT + plotH);
+      ctx.stroke();
+
+      ctx.fillStyle = '#a1a1aa';
+      ctx.font = '10px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`${p}`, cx, padT + plotH + 18);
+    }
+
+    for (let d = 0; d <= maxDistanciaScale; d += 30) {
+      const cy = getY(d);
+      ctx.beginPath();
+      ctx.moveTo(padL, cy);
+      ctx.lineTo(padL + plotW, cy);
+      ctx.stroke();
+
+      ctx.fillStyle = '#a1a1aa';
+      ctx.font = '10px sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${d.toFixed(0)}m`, padL - 8, cy + 4);
+    }
+
+    // 3. EJES CARTESIANOS
+    ctx.strokeStyle = '#71717a';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT + plotH);
+    ctx.lineTo(padL + plotW, padT + plotH); // Eje X (Piso)
+    ctx.moveTo(padL, padT);
+    ctx.lineTo(padL, padT + plotH); // Eje Y
+    ctx.stroke();
+
+    ctx.fillStyle = '#d4d4d8';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Cantidad de Pasos (x)', padL + plotW / 2, h - 8);
+
+    // 4. LÍNEA TEÓRICA PUNTEADA DE LA FUNCIÓN
+    ctx.strokeStyle = 'rgba(16, 185, 129, 0.25)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(0));
+    ctx.lineTo(getX(maxPasos), getY(maxPasos * m));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 5. TRAZO VIVO Y PROYECCIONES
+    const curX = getX(pasos);
+    const curY = getY(distancia);
+    const groundY = getY(0); // Coordenada del suelo (Eje X)
+
+    // Línea de la función trazada hasta el punto actual
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(0));
+    ctx.lineTo(curX, curY);
+    ctx.stroke();
+
+    // Línea guía vertical (Une a Camila en el suelo con la gráfica)
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(curX, groundY);
+    ctx.lineTo(curX, curY);
+    ctx.stroke();
+    // Línea guía horizontal al eje Y
+    ctx.beginPath();
+    ctx.moveTo(curX, curY);
+    ctx.lineTo(getX(0), curY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Punto resaltado en la gráfica
+    ctx.fillStyle = '#f59e0b';
+    ctx.beginPath();
+    ctx.arc(curX, curY, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Etiqueta de coordenadas (x, y) sobre el punto de la función
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.roundRect(curX - 35, curY - 26, 70, 18, 4);
+    ctx.fill();
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`(${Math.floor(pasos)}p, ${distancia.toFixed(1)}m)`, curX, curY - 13);
+
+    // 6. CAMILA CAMINANDO SOBRE EL PISO (Eje X)
+    dibujarCamilaEnElSuelo(ctx, curX, groundY, pasos);
+  }
+
+  // Dibuja a Camila exactamente pisando el suelo (Eje X)
+  function dibujarCamilaEnElSuelo(ctx: CanvasRenderingContext2D, x: number, y: number, p: number) {
+    ctx.save();
+    ctx.translate(x, y);
+
+    const legAngle = Math.sin(p * 0.3) * 0.5;
+
+    // Sombra sobre el piso
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 9, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Piernas (apoyadas en y = 0)
+    ctx.strokeStyle = '#f4f4f5';
+    ctx.lineWidth = 3;
+    
+    ctx.beginPath();
+    ctx.moveTo(0, -16);
+    ctx.lineTo(Math.sin(legAngle) * 10, 0);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0, -16);
+    ctx.lineTo(Math.sin(-legAngle) * 10, 0);
+    ctx.stroke();
+
+    // Torso / Ropa
+    ctx.fillStyle = '#10b981';
+    ctx.beginPath();
+    ctx.roundRect(-6, -32, 12, 18, 4);
+    ctx.fill();
+
+    // Cabeza
+    ctx.fillStyle = '#fde047';
+    ctx.beginPath();
+    ctx.arc(0, -39, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  setTimeout(resizeCanvas, 50);
+</script>

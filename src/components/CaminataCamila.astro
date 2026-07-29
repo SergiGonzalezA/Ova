@@ -1,0 +1,133 @@
+---
+// src/components/CaminataConFondoLocal.astro
+// Archivos en public/:
+// - public/good.json  (Fondo)
+// - public/caminante.json (Personaje)
+---
+
+<div class="animation-stage">
+  <!-- 1. Fondo Animado Lottie -->
+  <div id="lottie-background" class="bg-lottie"></div>
+
+  <!-- 2. Personaje Caminando sobre el Fondo -->
+  <div id="character-walker" class="character-walker">
+    <div id="lottie-character"></div>
+  </div>
+</div>
+
+<!-- Librería Lottie Web -->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+
+<style is:global>
+  .animation-stage {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 70%, #e0f2fe 100%);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Capa de fondo Lottie */
+  .bg-lottie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .bg-lottie svg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    background-color: transparent !important;
+  }
+
+  /* Capa del Personaje (z-index superior para garantizar visibilidad) */
+  .character-walker {
+    position: absolute;
+    bottom: 30px;
+    left: -120px;
+    z-index: 99;
+    will-change: left;
+    pointer-events: none;
+  }
+
+  #lottie-character {
+    width: 150px;
+    height: 150px;
+    display: block !important;
+  }
+
+  #lottie-character svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+</style>
+
+<script>
+  declare const lottie: any;
+
+  let posX = -15;
+  const velocidad = 0.15;
+
+  function initAnimations() {
+    const bgContainer = document.getElementById('lottie-background');
+    const charContainer = document.getElementById('lottie-character');
+    const walker = document.getElementById('character-walker');
+
+    if (!bgContainer || !charContainer || !walker) return;
+
+    // 1. Cargar Fondo desde /good.json
+    try {
+      lottie.loadAnimation({
+        container: bgContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/Good.json'
+      });
+    } catch (e) {
+      console.error('Error cargando fondo /good.json:', e);
+    }
+
+    // 2. Cargar Personaje desde /caminante.json
+    try {
+      const charAnim = lottie.loadAnimation({
+        container: charContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/caminante.json'
+      });
+
+      charAnim.setSpeed(1.0);
+    } catch (e) {
+      console.error('Error cargando caminante /caminante.json:', e);
+    }
+
+    // 3. Bucle para mover al caminante
+    function mover() {
+      posX += velocidad;
+
+      if (posX > 108) {
+        posX = -15; // Reiniciar cuando cruza la pantalla
+      }
+
+      walker.style.left = `${posX}%`;
+      requestAnimationFrame(mover);
+    }
+
+    mover();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnimations);
+  } else {
+    initAnimations();
+  }
+</script>
