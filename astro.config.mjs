@@ -6,8 +6,6 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://SergiGonzalezA.github.io',
-  base: 'Ova',
   integrations: [
     starlight({
       title: 'Inicio',
