@@ -1,0 +1,205 @@
+---
+// Definición de las parejas de datos (Entrada -> Respuesta esperada)
+const datosTabla = [
+  { respuestas: 0, puntajeEsperado: "0", esEditable: false },
+  { respuestas: 1, puntajeEsperado: "2", esEditable: true },
+  { respuestas: 2, puntajeEsperado: "4", esEditable: true },
+  { respuestas: 3, puntajeEsperado: "6", esEditable: true },
+  { respuestas: 4, puntajeEsperado: "8", esEditable: true },
+  { respuestas: 5, puntajeEsperado: "10", esEditable: true },
+];
+---
+
+<div class="tabla-container">
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Respuestas correctas</th>
+          <th>Puntaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {datosTabla.map((fila) => (
+          <tr>
+            <td>{fila.respuestas}</td>
+            <td>
+              {fila.esEditable ? (
+                <input
+                  type="text"
+                  data-answer={fila.puntajeEsperado}
+                  placeholder="?"
+                  autocomplete="off"
+                />
+              ) : (
+                <span>{fila.puntajeEsperado}</span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <button id="btn-validar" class="btn-submit">Verificar Respuestas</button>
+  <div id="feedback-msg" class="feedback"></div>
+</div>
+
+<script>
+  function setupValidation() {
+    const btn = document.getElementById('btn-validar');
+    const feedbackDiv = document.getElementById('feedback-msg');
+    const inputs = document.querySelectorAll<HTMLInputElement>('input[data-answer]');
+
+    if (!btn || !feedbackDiv) return;
+
+    btn.addEventListener('click', () => {
+      let correctos = 0;
+
+      inputs.forEach((input) => {
+        const respuestaUsuario = input.value.trim();
+        const respuestaEsperada = input.getAttribute('data-answer')?.trim();
+
+        if (respuestaUsuario === respuestaEsperada && respuestaUsuario !== '') {
+          input.classList.remove('incorrect');
+          input.classList.add('correct');
+          correctos++;
+        } else {
+          input.classList.remove('correct');
+          input.classList.add('incorrect');
+        }
+      });
+
+      if (correctos === inputs.length) {
+        feedbackDiv.className = 'feedback success';
+        feedbackDiv.textContent = '¡Excelente trabajo! Todas las respuestas son correctas. 🎉';
+      } else {
+        feedbackDiv.className = 'feedback error';
+        feedbackDiv.textContent = `Tienes ${correctos} de ${inputs.length} respuestas correctas. ¡Revisa e inténtalo de nuevo!`;
+      }
+    });
+  }
+
+  // Soporte para carga normal y View Transitions en Astro
+  document.addEventListener('astro:page-load', setupValidation);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupValidation);
+  } else {
+    setupValidation();
+  }
+</script>
+
+<style>
+  .tabla-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #cbd5e1;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+  }
+
+  th, td {
+    padding: 4px 8px; /* Alto reducido de celdas */
+    text-align: center;
+    border: 1px solid #94a3b8;
+    line-height: 1.2;
+  }
+
+  th {
+    background-color: #d1d5db;
+    color: #0f172a;
+    font-weight: 700;
+    width: 50%;
+    padding: 6px 8px;
+  }
+
+  td {
+    width: 50%;
+  }
+
+  input[type="text"] {
+    width: 70px;
+    padding: 2px 4px; /* Relleno compacto para el input */
+    height: 28px;     /* Altura controlada */
+    border: 1.5px solid #cbd5e1;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  input[type="text"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+  }
+
+  /* Estilos de validación */
+  input.correct {
+    border-color: #22c55e !important;
+    background-color: #f0fdf4;
+    color: #15803d;
+    font-weight: bold;
+  }
+
+  input.incorrect {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2;
+    color: #b91c1c;
+    font-weight: bold;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-submit:hover {
+    background-color: #1d4ed8;
+  }
+
+  .feedback {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: none;
+  }
+
+  .feedback.success {
+    display: block;
+    background-color: #dcfce7;
+    color: #15803d;
+  }
+
+  .feedback.error {
+    display: block;
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+</style>

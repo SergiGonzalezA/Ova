@@ -1,0 +1,607 @@
+---
+const preguntas = [
+  {
+    pregunta:
+      "Una función relaciona valores de entrada con valores de salida. ¿Cuál condición debe cumplirse necesariamente?",
+    opciones: [
+      "Cada entrada tiene exactamente una salida",
+      "Cada entrada tiene al menos dos salidas",
+      "Todas las entradas tienen la misma salida",
+      "Cada salida tiene exactamente una entrada"
+    ],
+    correcta: 0,
+    explicacion:
+      "Una función asigna a cada valor de entrada un único valor de salida."
+  },
+
+  {
+    pregunta:
+      "Considera la relación {(1, 3), (2, 5), (3, 7), (4, 9)}. ¿Esta relación representa una función?",
+    opciones: [
+      "No, porque las salidas son diferentes",
+      "No, porque hay cuatro pares ordenados",
+      "Sí, porque cada valor de entrada tiene una única salida",
+      "Sí, porque todos los valores son números naturales"
+    ],
+    correcta: 2,
+    explicacion:
+      "Cada valor de entrada aparece una sola vez y tiene una única salida."
+  },
+
+  {
+    pregunta:
+      "En la relación {(2, 5), (3, 7), (2, 8), (4, 9)}, ¿qué ocurre con el valor de entrada 2?",
+    opciones: [
+      "Tiene exactamente un valor de salida",
+      "Tiene dos valores de salida diferentes",
+      "No tiene ningún valor de salida",
+      "Es un valor del rango"
+    ],
+    correcta: 1,
+    explicacion:
+      "El valor de entrada 2 está relacionado con 5 y con 8. Por eso tiene dos salidas diferentes."
+  },
+
+  {
+    pregunta:
+      "Una máquina transforma cada número de entrada según la regla: salida = entrada + 4. Si la entrada es 6, ¿cuál es la salida?",
+    opciones: [
+      "2",
+      "24",
+      "64",
+      "10"
+    ],
+    correcta: 3,
+    explicacion:
+      "Aplicamos la regla: 6 + 4 = 10."
+  },
+
+  {
+    pregunta:
+      "Observa la relación {(1, 4), (2, 4), (3, 5), (4, 6)}. ¿Cuál afirmación es correcta?",
+    opciones: [
+      "No es una función porque dos entradas tienen la misma salida",
+      "No es una función porque tiene cuatro entradas",
+      "Es una función porque cada entrada tiene una única salida",
+      "Es una función únicamente porque todas las salidas son diferentes"
+    ],
+    correcta: 2,
+    explicacion:
+      "Es una función porque cada entrada tiene una única salida. Varias entradas pueden compartir una misma salida."
+  }
+];
+---
+
+<div class="autoevaluacion" id="autoevaluacion">
+
+  <div class="quiz-header">
+    <span>Autoevaluación</span>
+    <h2>Concepto de función</h2>
+
+    <div class="progreso">
+      <div class="progreso-barra">
+        <div id="progreso"></div>
+      </div>
+
+      <p>
+        Pregunta <strong id="numeroPregunta">1</strong> de {preguntas.length}
+      </p>
+    </div>
+  </div>
+
+
+  <div class="pregunta-container">
+
+    <h3 id="pregunta"></h3>
+
+    <div id="opciones" class="opciones"></div>
+
+    <div id="retroalimentacion" class="retroalimentacion"></div>
+
+  </div>
+
+
+  <div class="quiz-controles">
+
+    <button id="btnSiguiente">
+      Siguiente →
+    </button>
+
+  </div>
+
+
+  <div id="resultado" class="resultado">
+
+    <div class="resultado-icono">
+      ✓
+    </div>
+
+    <h2>¡Autoevaluación terminada!</h2>
+
+    <p>
+      Tu resultado fue:
+    </p>
+
+    <div class="puntaje">
+      <span id="puntaje">0</span> / {preguntas.length}
+    </div>
+
+    <p id="mensajeResultado"></p>
+
+    <button id="btnReintentar">
+      Intentar nuevamente
+    </button>
+
+  </div>
+
+</div>
+
+
+<script define:vars={{ preguntas }}>
+  const preguntaElemento = document.getElementById("pregunta");
+  const opcionesElemento = document.getElementById("opciones");
+  const retroalimentacionElemento =
+    document.getElementById("retroalimentacion");
+
+  const numeroPregunta =
+    document.getElementById("numeroPregunta");
+
+  const progreso =
+    document.getElementById("progreso");
+
+  const btnSiguiente =
+    document.getElementById("btnSiguiente");
+
+  const resultado =
+    document.getElementById("resultado");
+
+  const puntaje =
+    document.getElementById("puntaje");
+
+  const mensajeResultado =
+    document.getElementById("mensajeResultado");
+
+  const btnReintentar =
+    document.getElementById("btnReintentar");
+
+
+  let preguntaActual = 0;
+  let puntuacion = 0;
+  let respondida = false;
+
+
+  function cargarPregunta() {
+
+    const pregunta = preguntas[preguntaActual];
+
+    respondida = false;
+
+    numeroPregunta.textContent =
+      preguntaActual + 1;
+
+    preguntaElemento.textContent =
+      pregunta.pregunta;
+
+    progreso.style.width =
+      `${((preguntaActual + 1) / preguntas.length) * 100}%`;
+
+    opcionesElemento.innerHTML = "";
+
+    retroalimentacionElemento.innerHTML = "";
+
+    retroalimentacionElemento.className =
+      "retroalimentacion";
+
+    btnSiguiente.disabled = true;
+
+    btnSiguiente.textContent =
+      preguntaActual === preguntas.length - 1
+        ? "Ver resultado"
+        : "Siguiente →";
+
+
+    pregunta.opciones.forEach((opcion, indice) => {
+
+      const boton = document.createElement("button");
+
+      boton.className = "opcion";
+
+      boton.innerHTML = `
+        <span class="letra">
+          ${String.fromCharCode(65 + indice)}
+        </span>
+
+        <span>
+          ${opcion}
+        </span>
+      `;
+
+      boton.addEventListener("click", () => {
+
+        if (respondida) return;
+
+        respondida = true;
+
+        const botones =
+          opcionesElemento.querySelectorAll(".opcion");
+
+        botones.forEach((b, i) => {
+
+          b.disabled = true;
+
+          if (i === pregunta.correcta) {
+            b.classList.add("correcta");
+          }
+
+        });
+
+
+        if (indice === pregunta.correcta) {
+
+          puntuacion++;
+
+          boton.classList.add("correcta");
+
+          retroalimentacionElemento.className =
+            "retroalimentacion correcta";
+
+          retroalimentacionElemento.innerHTML = `
+            <strong>✓ ¡Correcto!</strong>
+            <p>${pregunta.explicacion}</p>
+          `;
+
+        } else {
+
+          boton.classList.add("incorrecta");
+
+          retroalimentacionElemento.className =
+            "retroalimentacion incorrecta";
+
+          retroalimentacionElemento.innerHTML = `
+            <strong>✗ Revisa tu respuesta</strong>
+            <p>${pregunta.explicacion}</p>
+          `;
+        }
+
+        btnSiguiente.disabled = false;
+
+      });
+
+      opcionesElemento.appendChild(boton);
+
+    });
+
+  }
+
+
+  btnSiguiente.addEventListener("click", () => {
+
+    if (!respondida) return;
+
+    if (preguntaActual < preguntas.length - 1) {
+
+      preguntaActual++;
+
+      cargarPregunta();
+
+    } else {
+
+      mostrarResultado();
+
+    }
+
+  });
+
+
+  function mostrarResultado() {
+
+    document
+      .querySelector(".pregunta-container")
+      .style.display = "none";
+
+    document
+      .querySelector(".quiz-controles")
+      .style.display = "none";
+
+    document
+      .querySelector(".quiz-header")
+      .style.display = "none";
+
+    resultado.classList.add("mostrar");
+
+    puntaje.textContent = puntuacion;
+
+
+    const porcentaje =
+      (puntuacion / preguntas.length) * 100;
+
+
+    if (porcentaje === 100) {
+
+      mensajeResultado.textContent =
+        "¡Excelente! Has comprendido muy bien el concepto de función.";
+
+    } else if (porcentaje >= 80) {
+
+      mensajeResultado.textContent =
+        "¡Muy bien! Tienes un buen dominio de los conceptos trabajados.";
+
+    } else if (porcentaje >= 60) {
+
+      mensajeResultado.textContent =
+        "Buen trabajo. Algunos conceptos necesitan un poco más de práctica.";
+
+    } else {
+
+      mensajeResultado.textContent =
+        "Te recomendamos revisar nuevamente los conceptos de entrada, salida y función.";
+
+    }
+
+  }
+
+
+  btnReintentar.addEventListener("click", () => {
+
+    preguntaActual = 0;
+
+    puntuacion = 0;
+
+    resultado.classList.remove("mostrar");
+
+    document
+      .querySelector(".pregunta-container")
+      .style.display = "";
+
+    document
+      .querySelector(".quiz-controles")
+      .style.display = "";
+
+    document
+      .querySelector(".quiz-header")
+      .style.display = "";
+
+    cargarPregunta();
+
+  });
+
+
+  cargarPregunta();
+</script>
+
+
+<style>
+
+.autoevaluacion {
+  max-width: 850px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background: var(--sl-color-gray-6);
+}
+
+
+.quiz-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+.quiz-header > span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+
+.quiz-header h2 {
+  margin-top: 0.4rem;
+}
+
+
+.progreso {
+  margin-top: 1.5rem;
+}
+
+
+.progreso-barra {
+  width: 100%;
+  height: 8px;
+  border-radius: 20px;
+  background: var(--sl-color-gray-5);
+  overflow: hidden;
+}
+
+
+#progreso {
+  height: 100%;
+  width: 20%;
+  background: var(--sl-color-accent);
+  transition: width 0.3s ease;
+}
+
+
+.progreso p {
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+}
+
+
+.pregunta-container h3 {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+.opcion {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  transition: 0.2s ease;
+}
+
+
+.opcion:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--sl-color-accent);
+}
+
+
+.letra {
+  min-width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  font-weight: bold;
+
+  background: var(--sl-color-gray-5);
+}
+
+
+.opcion.correcta {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+
+.opcion.incorrecta {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+
+.retroalimentacion {
+  display: none;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+
+.retroalimentacion.correcta,
+.retroalimentacion.incorrecta {
+  display: block;
+}
+
+
+.retroalimentacion.correcta {
+  background: rgba(34, 197, 94, 0.12);
+}
+
+
+.retroalimentacion.incorrecta {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+
+.retroalimentacion p {
+  margin: 0.5rem 0 0;
+}
+
+
+.quiz-controles {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+
+.quiz-controles button,
+#btnReintentar {
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.4rem;
+  background: var(--sl-color-accent);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.quiz-controles button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+.resultado {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+
+.resultado.mostrar {
+  display: block;
+}
+
+
+.resultado-icono {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 2rem;
+  background: var(--sl-color-accent);
+  color: white;
+}
+
+
+.puntaje {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+
+#mensajeResultado {
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+
+
+@media (max-width: 600px) {
+
+  .autoevaluacion {
+    padding: 1.2rem;
+    margin: 2rem auto;
+  }
+
+  .pregunta-container h3 {
+    font-size: 1.1rem;
+  }
+
+  .opcion {
+    padding: 0.8rem;
+  }
+
+}
+
+</style>

@@ -4,15 +4,111 @@ description: Descripción breve de esta secuencia
 ---
 
 import GeoGebraApplet from '../../../../components/GeoGebraApplet.astro';
+import TablaPuntaje from '../../../../components/TablaPuntaje.astro';
+import AutoevaluacionSesion1 from '../../../../components/AutoevaluacionSesion1.astro';
 
-Aquí va el contenido de tu primera secuencia didáctica.
+## Interactua con geo-gebra
+<GeoGebraApplet materialId="gazwyyha" />
 
-## Objetivo
+## Actividades de aplicación
+<p>
+  <strong>Actividad 1. ¿Es o no es una función?</strong> 
+</p>
 
-Escribe aquí el objetivo de aprendizaje.
+Una función establece una relación entre dos conjuntos de valores. Para que una relación sea una función, cada elemento del dominio debe estar relacionado con una única imagen. Observa las relaciones en GeoGebra y determina cuál representa una función.
 
-## Desarrollo
+<GeoGebraApplet materialId="jhy5uuzx" />
 
-Escribe aquí las actividades o explicación.
+🔴 Relación A: Observa los puntos representados en GeoGebra: <span set:html={'<span style="color: #FF0000; font-weight: bold;">{(1,3), (1,5), (2,7), (3,8)}</span>'} />
+Analiza qué ocurre con los valores de <span><em>"x"</em></span> y <span><em>"y"</em></span>.
 
-<GeoGebraApplet materialId="g8dpfg6y" />
+<p>
+  <strong>Pregunta 1:</strong> ¿La Relación A representa una función?
+</p>
+
+🟣 Relación B: Observa los puntos representados en GeoGebra: <span set:html={'<span style="color: #800080; font-weight: bold;">{(2,1), (4,3), (6,5), (8,7)}</span>'} />
+Analiza qué ocurre con los valores de <span><em>"x"</em></span> y <span><em>"y"</em></span>.
+
+<p>
+  <strong>Pregunta 2:</strong> ¿La Relación B representa una función?
+</p>
+
+<p>
+  <strong>Pregunta 3:</strong> ¿Qué condición debe cumplirse para que una relación sea una función?
+</p>
+
+<p>
+  <strong>Reto de exploración:</strong> Construye en GeoGebra una relación que sí sea una función arrastrando los puntos de color <span style="color: #15803d; font-weight: bold;">verde</span>.
+</p>
+
+---
+
+<p>
+  <strong>Actividad 2. ¿Cuál es el dominio y cuál es el rango?</strong> 
+</p>
+Camila está registrando la cantidad de páginas que lee durante varios días. La siguiente relación representa los datos registrados:
+<table>
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Páginas leídas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">16</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">8</td>
+      <td style="text-align: center;">25</td>
+    </tr>
+  </tbody>
+</table>
+
+En esta actividad, el número del día representa la entrada y la cantidad de páginas leídas representa la salida.
+
+<p>
+  <strong>Paso 1. Representar la situación en GeoGebra</strong> 
+</p>
+
+Utiliza el siguiente recurso de GeoGebra y ubica los puntos (1,1), (2,4), (3,9), (4,16) y (5,25) de forma correcta en el plano cartesiano
+<GeoGebraApplet materialId="zuprngdg" />
+
+<p>
+  <strong>Paso 2. Identifica el dominio</strong> 
+</p>
+<p>
+  <strong>Pregunta 3:</strong>  ¿Cuáles son los valores que representan las entradas de la relación?
+</p>
+<p>
+  <strong>Paso 3. Identifica el rango</strong> 
+</p>
+<p>
+  <strong>Pregunta 4:</strong>¿Cuáles son los valores que obtenemos como resultado de la relación?
+</p>
+
+---
+
+<p>
+  <strong>Actividad 3. De una situación a la representación de una función</strong> 
+</p>
+
+<p>
+  <strong>Situación:</strong> En una actividad escolar, cada estudiante recibe 2 puntos por cada respuesta correcta. Queremos analizar cómo cambia el puntaje dependiendo del número de respuestas correctas.
+</p>
+
+<TablaPuntaje />
+<AutoevaluacionSesion1 />
