@@ -1,0 +1,3447 @@
+---
+---
+
+<div class="laboratorio">
+
+  <!-- =========================================
+       ENCABEZADO
+  ========================================== -->
+
+  <header class="lab-header">
+
+    <span class="lab-badge">
+      ACTIVIDAD 2.4
+    </span>
+
+    <h1>
+      Construyendo modelos matemáticos
+    </h1>
+
+    <p>
+      Aprende a construir una función lineal a partir de una situación
+      cotidiana, utilizando tablas, expresiones algebraicas y gráficas.
+    </p>
+
+  </header>
+
+
+  <!-- =========================================
+       SITUACIÓN PROBLEMA
+  ========================================== -->
+
+  <section class="situacion">
+
+    <div class="situacion-icono">
+      💰
+    </div>
+
+    <div>
+
+      <h2>
+        Una meta de ahorro
+      </h2>
+
+      <p>
+        Camila tiene <strong>$20.000</strong> ahorrados y decide guardar
+        <strong>$10.000 cada semana</strong>.
+      </p>
+
+      <p>
+        Ella quiere saber cuánto dinero tendrá después de varias semanas.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       MISIÓN
+  ========================================== -->
+
+  <section class="mision">
+
+    <div class="mision-numero">
+      🎯
+    </div>
+
+    <div>
+
+      <h2>
+        Tu misión
+      </h2>
+
+      <p>
+        Construye un modelo matemático que permita calcular cuánto dinero
+        tendrá Camila después de cualquier número de semanas.
+      </p>
+
+      <div class="ruta">
+
+        <span>Situación</span>
+        <span>→</span>
+        <span>Datos</span>
+        <span>→</span>
+        <span>Tabla</span>
+        <span>→</span>
+        <span>Función</span>
+        <span>→</span>
+        <span>Gráfica</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 1
+  ========================================== -->
+
+  <section
+    class="etapa"
+    data-etapa="1"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        1
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          EXPLORA
+        </span>
+
+        <h2>
+          ¿Qué información necesitamos?
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      Antes de construir el modelo, identifica qué información de la
+      situación será necesaria para resolver el problema.
+    </p>
+
+
+    <p class="instruccion">
+
+      <strong>
+        Selecciona todas las opciones que consideres necesarias.
+      </strong>
+
+    </p>
+
+
+    <div class="opciones-check">
+
+
+      <label class="opcion-check">
+
+        <input
+          type="checkbox"
+          value="semanas"
+        />
+
+        <span>
+
+          <strong>
+            El número de semanas
+          </strong>
+
+          <small>
+            Permite saber cuánto tiempo ha pasado.
+          </small>
+
+        </span>
+
+      </label>
+
+
+      <label class="opcion-check">
+
+        <input
+          type="checkbox"
+          value="ahorro"
+        />
+
+        <span>
+
+          <strong>
+            La cantidad que ahorra cada semana
+          </strong>
+
+          <small>
+            Permite conocer cuánto aumenta el ahorro.
+          </small>
+
+        </span>
+
+      </label>
+
+
+      <label class="opcion-check">
+
+        <input
+          type="checkbox"
+          value="inicial"
+        />
+
+        <span>
+
+          <strong>
+            El dinero que tenía inicialmente
+          </strong>
+
+          <small>
+            Es el punto de partida del ahorro.
+          </small>
+
+        </span>
+
+      </label>
+
+
+      <label class="opcion-check">
+
+        <input
+          type="checkbox"
+          value="edad"
+        />
+
+        <span>
+
+          <strong>
+            La edad de Camila
+          </strong>
+
+          <small>
+            No necesitamos este dato para construir el modelo.
+          </small>
+
+        </span>
+
+      </label>
+
+
+      <label class="opcion-check">
+
+        <input
+          type="checkbox"
+          value="meses"
+        />
+
+        <span>
+
+          <strong>
+            El número de meses del año
+          </strong>
+
+          <small>
+            No necesitamos esta información.
+          </small>
+
+        </span>
+
+      </label>
+
+
+    </div>
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa1"
+    >
+      Comprobar
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback1"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 2
+  ========================================== -->
+
+  <section
+    class="etapa bloqueada"
+    data-etapa="2"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        2
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          CONSTRUYE
+        </span>
+
+        <h2>
+          Construye una tabla
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      Representa la situación mediante una tabla.
+      Completa cuánto dinero tendrá Camila en cada semana.
+    </p>
+
+
+    <div class="tabla-wrapper">
+
+      <table class="tabla-ahorro">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Semana
+            </th>
+
+            <th>
+              Dinero ahorrado ($)
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          <tr>
+
+            <td>
+              0
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="tabla-input"
+                data-semana="0"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              1
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="tabla-input"
+                data-semana="1"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              2
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="tabla-input"
+                data-semana="2"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              3
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="tabla-input"
+                data-semana="3"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              4
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="tabla-input"
+                data-semana="4"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              5
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="tabla-input"
+                data-semana="5"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa2"
+    >
+      Comprobar tabla
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback2"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 3
+  ========================================== -->
+
+  <section
+    class="etapa bloqueada"
+    data-etapa="3"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        3
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          ANALIZA
+        </span>
+
+        <h2>
+          Descubre el patrón
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      Observa los valores de la tabla y busca una regularidad.
+    </p>
+
+
+    <div class="pregunta">
+
+      <label>
+        ¿Cuánto aumenta el dinero de Camila cada semana?
+      </label>
+
+
+      <div class="radio-grupo">
+
+        <label>
+
+          <input
+            type="radio"
+            name="aumento"
+            value="5000"
+          />
+
+          $5.000
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="aumento"
+            value="10000"
+          />
+
+          $10.000
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="aumento"
+            value="20000"
+          />
+
+          $20.000
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="pregunta">
+
+      <label>
+        ¿Cuál es el dinero que tenía Camila al comenzar?
+      </label>
+
+
+      <div class="radio-grupo">
+
+        <label>
+
+          <input
+            type="radio"
+            name="inicial"
+            value="10000"
+          />
+
+          $10.000
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="inicial"
+            value="20000"
+          />
+
+          $20.000
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="inicial"
+            value="30000"
+          />
+
+          $30.000
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa3"
+    >
+      Comprobar
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback3"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 4
+  ========================================== -->
+
+  <section
+    class="etapa bloqueada"
+    data-etapa="4"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        4
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          MODELA
+        </span>
+
+        <h2>
+          Construye la función
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      Recuerda la estructura de una función lineal:
+    </p>
+
+
+    <div class="formula-base">
+      f(x) = mx + b
+    </div>
+
+
+    <p>
+      Utiliza el patrón que descubriste para completar la expresión.
+    </p>
+
+
+    <div class="formula-constructor">
+
+      <span>
+        f(x) =
+      </span>
+
+
+      <input
+        type="number"
+        id="coeficienteM"
+        placeholder="m"
+      />
+
+
+      <span>
+        x +
+      </span>
+
+
+      <input
+        type="number"
+        id="terminoB"
+        placeholder="b"
+      />
+
+    </div>
+
+
+    <div class="ayuda-modelo">
+
+      <p>
+        💡 <strong>Pista:</strong>
+        uno de los valores representa cuánto aumenta el dinero cada semana
+        y el otro representa la cantidad inicial.
+      </p>
+
+    </div>
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa4"
+    >
+      Comprobar función
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback4"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 5
+  ========================================== -->
+
+  <section
+    class="etapa bloqueada"
+    data-etapa="5"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        5
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          PREDICE
+        </span>
+
+        <h2>
+          ¿Cuánto tendrá después de 10 semanas?
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      Utiliza el modelo que construiste para calcular cuánto dinero tendrá
+      Camila después de <strong>10 semanas</strong>.
+    </p>
+
+
+    <div class="calculo">
+
+      <div class="calculo-dato">
+
+        <span>
+          Semanas
+        </span>
+
+        <strong>
+          10
+        </strong>
+
+      </div>
+
+
+      <div class="calculo-operador">
+        →
+      </div>
+
+
+      <div>
+
+        <input
+          type="number"
+          id="resultado10"
+          placeholder="¿Cuánto?"
+        />
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa5"
+    >
+      Comprobar predicción
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback5"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 6 - GEOGEBRA DINÁMICO
+  ========================================== -->
+
+  <section
+    class="etapa bloqueada"
+    data-etapa="6"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        6
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          EXPLORA CON GEOGEBRA
+        </span>
+
+        <h2>
+          Observa tu modelo gráficamente
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      Ahora observa cómo tu modelo matemático se transforma en una
+      representación gráfica.
+    </p>
+
+
+    <div class="conexion-modelo">
+
+      <div class="conexion-icono">
+        🔗
+      </div>
+
+      <div>
+
+        <strong>
+          Tu modelo se conectó con GeoGebra
+        </strong>
+
+        <p>
+          La gráfica que aparece a continuación corresponde a la función
+          que construiste en la etapa anterior.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONTENEDOR GEOGEBRA -->
+
+    <div class="geogebra-contenedor">
+
+      <div
+        id="ggb-element"
+        class="geogebra-app"
+      ></div>
+
+      <div
+        id="ggb-loading"
+        class="geogebra-loading"
+      >
+        <span class="spinner"></span>
+
+        <span>
+          Cargando GeoGebra...
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- MODELO ENVIADO -->
+
+    <div
+      id="modelo-geogebra"
+      class="modelo-geogebra"
+    >
+
+      <span>
+        Modelo explorado
+      </span>
+
+      <strong id="modelo-geogebra-texto">
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="geogebra-instruccion">
+
+      <strong>
+        🔎 Explora la gráfica
+      </strong>
+
+      <ul>
+
+        <li>
+          Observa la dirección de la recta.
+        </li>
+
+        <li>
+          Identifica dónde corta la recta al eje vertical.
+        </li>
+
+        <li>
+          Observa qué representa la inclinación de la recta.
+        </li>
+
+        <li>
+          Puedes hacer zoom y desplazarte por la gráfica.
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- PREGUNTA 1 -->
+
+    <div class="pregunta">
+
+      <label>
+        ¿Cómo es el comportamiento de la gráfica?
+      </label>
+
+
+      <div class="radio-grupo">
+
+        <label>
+
+          <input
+            type="radio"
+            name="grafica"
+            value="decreciente"
+          />
+
+          Decreciente
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="grafica"
+            value="constante"
+          />
+
+          Constante
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="grafica"
+            value="creciente"
+          />
+
+          Creciente
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- PREGUNTA 2 -->
+
+    <div class="pregunta">
+
+      <label>
+        ¿Qué representa el punto donde la recta corta el eje Y?
+      </label>
+
+
+      <div class="radio-grupo">
+
+        <label>
+
+          <input
+            type="radio"
+            name="ejeY"
+            value="semanas"
+          />
+
+          El número de semanas
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="ejeY"
+            value="inicial"
+          />
+
+          El dinero inicial
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="ejeY"
+            value="aumento"
+          />
+
+          El aumento semanal
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- PREGUNTA 3 -->
+
+    <div class="pregunta">
+
+      <label>
+        ¿Qué representa la inclinación de la recta?
+      </label>
+
+
+      <div class="radio-grupo">
+
+        <label>
+
+          <input
+            type="radio"
+            name="pendiente"
+            value="inicial"
+          />
+
+          El dinero inicial
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="pendiente"
+            value="semanal"
+          />
+
+          El aumento de dinero por semana
+
+        </label>
+
+
+        <label>
+
+          <input
+            type="radio"
+            name="pendiente"
+            value="semanas"
+          />
+
+          El número de semanas
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa6"
+    >
+      Comprobar
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback6"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       ETAPA 7
+  ========================================== -->
+
+  <section
+    class="etapa bloqueada"
+    data-etapa="7"
+  >
+
+    <div class="etapa-header">
+
+      <span class="etapa-numero">
+        7
+      </span>
+
+      <div>
+
+        <span class="etiqueta">
+          DESAFÍO FINAL
+        </span>
+
+        <h2>
+          Ahora construye tu propio modelo
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="desafio">
+
+      <div class="desafio-icono">
+        🚀
+      </div>
+
+      <div>
+
+        <h3>
+          El ahorro de Juan
+        </h3>
+
+        <p>
+          Juan tiene <strong>$50.000</strong> ahorrados y decide guardar
+          <strong>$15.000 cada semana</strong>.
+        </p>
+
+        <p>
+          Construye un modelo que permita calcular cuánto dinero tendrá
+          después de cualquier número de semanas.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <h3 class="subtitulo">
+      1. Identifica las variables
+    </h3>
+
+
+    <div class="desafio-form">
+
+      <div class="campo">
+
+        <label>
+          ¿Qué representa x?
+        </label>
+
+        <input
+          type="text"
+          id="juanX"
+          placeholder="Escribe tu respuesta"
+        />
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          ¿Qué representa f(x)?
+        </label>
+
+        <input
+          type="text"
+          id="juanFx"
+          placeholder="Escribe tu respuesta"
+        />
+
+      </div>
+
+    </div>
+
+
+    <h3 class="subtitulo">
+      2. Construye la función
+    </h3>
+
+
+    <div class="formula-constructor">
+
+      <span>
+        f(x) =
+      </span>
+
+
+      <input
+        type="number"
+        id="juanM"
+        placeholder="m"
+      />
+
+
+      <span>
+        x +
+      </span>
+
+
+      <input
+        type="number"
+        id="juanB"
+        placeholder="b"
+      />
+
+    </div>
+
+
+    <h3 class="subtitulo">
+      3. Completa la tabla
+    </h3>
+
+
+    <div class="tabla-wrapper">
+
+      <table class="tabla-ahorro">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Semana
+            </th>
+
+            <th>
+              Dinero ($)
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          <tr>
+
+            <td>
+              0
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="juan-tabla"
+                data-semana-juan="0"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              2
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="juan-tabla"
+                data-semana-juan="2"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              4
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="juan-tabla"
+                data-semana-juan="4"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              6
+            </td>
+
+            <td>
+
+              <input
+                type="number"
+                class="juan-tabla"
+                data-semana-juan="6"
+                placeholder="$"
+              />
+
+            </td>
+
+          </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <h3 class="subtitulo">
+      4. Predice
+    </h3>
+
+
+    <p>
+      ¿Cuánto dinero tendrá Juan después de <strong>8 semanas</strong>?
+    </p>
+
+
+    <input
+      type="number"
+      id="juanResultado"
+      placeholder="Resultado"
+      class="resultado-final-input"
+    />
+
+
+    <button
+      class="btn-principal"
+      id="btnEtapa7"
+    >
+      Comprobar desafío
+    </button>
+
+
+    <div
+      class="feedback"
+      id="feedback7"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================================
+       FINAL
+  ========================================== -->
+
+  <section
+    class="final bloqueada"
+    data-etapa="8"
+  >
+
+    <div class="final-icono">
+      🏆
+    </div>
+
+
+    <h2>
+      ¡Modelo construido!
+    </h2>
+
+
+    <p>
+      Has recorrido el proceso completo para transformar una situación
+      cotidiana en un modelo matemático.
+    </p>
+
+
+    <div class="modelo-final">
+
+      <span>
+        Modelo de ahorro de Camila
+      </span>
+
+      <strong>
+        f(x) = 10000x + 20000
+      </strong>
+
+    </div>
+
+
+    <div class="aprendizajes">
+
+
+      <div>
+
+        <strong>
+          m
+        </strong>
+
+        <span>
+          representa el cambio por semana.
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          b
+        </strong>
+
+        <span>
+          representa el valor inicial.
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          x
+        </strong>
+
+        <span>
+          representa el número de semanas.
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+    <p class="mensaje-final">
+
+      💡 Una función lineal permite representar matemáticamente
+      situaciones en las que existe un cambio constante.
+
+    </p>
+
+  </section>
+
+</div>
+
+
+<!-- =========================================
+     ESTILOS
+========================================== -->
+
+<style>
+
+  .laboratorio {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem 0 4rem;
+  }
+
+
+  /* HEADER */
+
+  .lab-header {
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    background:
+      linear-gradient(
+        135deg,
+        var(--sl-color-accent-low),
+        var(--sl-color-bg)
+      );
+    border: 1px solid var(--sl-color-gray-5);
+    margin-bottom: 1.5rem;
+  }
+
+
+  .lab-badge {
+    display: inline-block;
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    padding: .4rem .8rem;
+    border-radius: 999px;
+    background: var(--sl-color-accent);
+    color: white;
+    margin-bottom: .8rem;
+  }
+
+
+  .lab-header h1 {
+    margin: 0 0 .8rem;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  }
+
+
+  .lab-header p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+
+  /* SITUACIÓN */
+
+  .situacion {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--sl-color-gray-5);
+    background: var(--sl-color-bg);
+  }
+
+
+  .situacion-icono {
+    font-size: 2.3rem;
+  }
+
+
+  .situacion h2 {
+    margin-top: 0;
+  }
+
+
+  .situacion p {
+    line-height: 1.7;
+  }
+
+
+  /* MISIÓN */
+
+  .mision {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 16px;
+    background: var(--sl-color-gray-6);
+  }
+
+
+  .mision-numero {
+    font-size: 2rem;
+  }
+
+
+  .mision h2 {
+    margin-top: 0;
+  }
+
+
+  .mision p {
+    line-height: 1.7;
+  }
+
+
+  .ruta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
+
+
+  .ruta span {
+    padding: .35rem .65rem;
+    border-radius: 8px;
+    background: var(--sl-color-bg);
+  }
+
+
+  /* ETAPAS */
+
+  .etapa {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 18px;
+    background: var(--sl-color-bg);
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+
+  .etapa.bloqueada {
+    display: none;
+  }
+
+
+  .etapa-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.2rem;
+  }
+
+
+  .etapa-numero {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--sl-color-accent);
+    color: white;
+    font-weight: 800;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+
+  .etapa-header h2 {
+    margin: 0;
+  }
+
+
+  .etiqueta {
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    color: var(--sl-color-accent-high);
+  }
+
+
+  .etapa > p {
+    line-height: 1.7;
+  }
+
+
+  .instruccion {
+    margin-top: 1.5rem;
+  }
+
+
+  /* CHECKBOX */
+
+  .opciones-check {
+    display: grid;
+    gap: .8rem;
+    margin: 1.5rem 0;
+  }
+
+
+  .opcion-check {
+    display: flex;
+    gap: .8rem;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    cursor: pointer;
+    transition:
+      border-color .2s,
+      transform .2s;
+  }
+
+
+  .opcion-check:hover {
+    transform: translateY(-2px);
+    border-color: var(--sl-color-accent);
+  }
+
+
+  .opcion-check input {
+    margin-top: .25rem;
+  }
+
+
+  .opcion-check span {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+  }
+
+
+  .opcion-check small {
+    opacity: .75;
+  }
+
+
+  /* TABLAS */
+
+  .tabla-wrapper {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+
+  .tabla-ahorro {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+
+  .tabla-ahorro th,
+  .tabla-ahorro td {
+    padding: .8rem;
+    text-align: center;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+
+
+  .tabla-ahorro th {
+    background: var(--sl-color-gray-6);
+    font-weight: 800;
+  }
+
+
+  /* INPUTS */
+
+  input[type="number"],
+  input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .75rem .8rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 9px;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    font-size: 1rem;
+  }
+
+
+  .tabla-input {
+    max-width: 180px;
+    text-align: center;
+  }
+
+
+  input:focus {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 1px;
+  }
+
+
+  /* RADIO */
+
+  .pregunta {
+    margin: 1.5rem 0;
+    padding: 1.2rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+  }
+
+
+  .pregunta > label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: .8rem;
+  }
+
+
+  .radio-grupo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+  }
+
+
+  .radio-grupo label {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .6rem .8rem;
+    border-radius: 8px;
+    background: var(--sl-color-bg);
+    cursor: pointer;
+  }
+
+
+  /* FORMULA */
+
+  .formula-base {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+    padding: 1.2rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+    font-size: 1.7rem;
+    font-weight: 800;
+  }
+
+
+  .formula-constructor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .7rem;
+    margin: 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-wrap: wrap;
+  }
+
+
+  .formula-constructor input {
+    width: 130px;
+    text-align: center;
+  }
+
+
+  /* AYUDA */
+
+  .ayuda-modelo {
+    padding: 1rem;
+    border-left: 4px solid var(--sl-color-accent);
+    background: var(--sl-color-gray-6);
+    border-radius: 8px;
+  }
+
+
+  .ayuda-modelo p {
+    margin: 0;
+  }
+
+
+  /* CALCULO */
+
+  .calculo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+
+  .calculo-dato {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+    text-align: center;
+  }
+
+
+  .calculo-dato span {
+    display: block;
+    font-size: .8rem;
+    opacity: .75;
+  }
+
+
+  .calculo-dato strong {
+    display: block;
+    margin-top: .3rem;
+    font-size: 1.5rem;
+  }
+
+
+  .calculo-operador {
+    font-size: 1.5rem;
+  }
+
+
+  /* =========================================
+     GEOGEBRA
+  ========================================== */
+
+  .conexion-modelo {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+    border-left: 4px solid var(--sl-color-accent);
+  }
+
+
+  .conexion-icono {
+    font-size: 1.6rem;
+  }
+
+
+  .conexion-modelo strong {
+    display: block;
+    margin-bottom: .3rem;
+  }
+
+
+  .conexion-modelo p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+
+  .geogebra-contenedor {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--sl-color-gray-5);
+    background: var(--sl-color-bg);
+  }
+
+
+  .geogebra-app {
+    width: 100%;
+    min-height: 500px;
+  }
+
+
+  .geogebra-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+    background: var(--sl-color-bg);
+    font-weight: 700;
+    transition: opacity .3s ease;
+  }
+
+
+  .geogebra-loading.oculto {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  .spinner {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 3px solid var(--sl-color-gray-5);
+    border-top-color: var(--sl-color-accent);
+    animation: girar .8s linear infinite;
+  }
+
+
+  @keyframes girar {
+
+    to {
+      transform: rotate(360deg);
+    }
+
+  }
+
+
+  .modelo-geogebra {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0 1.5rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+    text-align: center;
+  }
+
+
+  .modelo-geogebra span {
+    font-size: .8rem;
+    opacity: .7;
+  }
+
+
+  .modelo-geogebra strong {
+    font-size: 1.35rem;
+  }
+
+
+  .geogebra-instruccion {
+    margin: 1.5rem 0 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+  }
+
+
+  .geogebra-instruccion ul {
+    margin-bottom: 0;
+  }
+
+
+  /* DESAFÍO */
+
+  .desafio {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 14px;
+    background: var(--sl-color-gray-6);
+  }
+
+
+  .desafio-icono {
+    font-size: 2rem;
+  }
+
+
+  .desafio h3 {
+    margin-top: 0;
+  }
+
+
+  .desafio p {
+    line-height: 1.7;
+  }
+
+
+  .subtitulo {
+    margin-top: 2rem;
+  }
+
+
+  .desafio-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+
+  .campo label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: .5rem;
+  }
+
+
+  .juan-tabla {
+    max-width: 180px;
+    text-align: center;
+  }
+
+
+  .resultado-final-input {
+    max-width: 250px;
+  }
+
+
+  /* BOTONES */
+
+  .btn-principal {
+    border: none;
+    border-radius: 10px;
+    padding: .8rem 1.3rem;
+    background: var(--sl-color-accent);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+      transform .2s,
+      opacity .2s;
+  }
+
+
+  .btn-principal:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+  }
+
+
+  /* FEEDBACK */
+
+  .feedback {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    line-height: 1.6;
+  }
+
+
+  .feedback.mostrar {
+    display: block;
+  }
+
+
+  .feedback.correcto {
+    border: 1px solid #22c55e;
+    background: rgba(34, 197, 94, .1);
+  }
+
+
+  .feedback.incorrecto {
+    border: 1px solid #ef4444;
+    background: rgba(239, 68, 68, .1);
+  }
+
+
+  /* CAMPOS */
+
+  .campo-correcto {
+    border-color: #22c55e !important;
+  }
+
+
+  .campo-incorrecto {
+    border-color: #ef4444 !important;
+  }
+
+
+  /* FINAL */
+
+  .final {
+    padding: 2.5rem 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid var(--sl-color-gray-5);
+    background:
+      linear-gradient(
+        135deg,
+        var(--sl-color-accent-low),
+        var(--sl-color-bg)
+      );
+  }
+
+
+  .final.bloqueada {
+    display: none;
+  }
+
+
+  .final-icono {
+    font-size: 3rem;
+  }
+
+
+  .final h2 {
+    font-size: 2rem;
+  }
+
+
+  .modelo-final {
+    margin: 1.5rem auto;
+    padding: 1.3rem;
+    max-width: 500px;
+    border-radius: 12px;
+    background: var(--sl-color-bg);
+  }
+
+
+  .modelo-final span {
+    display: block;
+    margin-bottom: .5rem;
+    font-size: .85rem;
+    opacity: .75;
+  }
+
+
+  .modelo-final strong {
+    font-size: 1.5rem;
+  }
+
+
+  .aprendizajes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+
+  .aprendizajes div {
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--sl-color-bg);
+  }
+
+
+  .aprendizajes strong {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--sl-color-accent-high);
+  }
+
+
+  .aprendizajes span {
+    display: block;
+    margin-top: .4rem;
+    font-size: .9rem;
+  }
+
+
+  .mensaje-final {
+    font-weight: 600;
+  }
+
+
+  /* RESPONSIVE */
+
+  @media (max-width: 700px) {
+
+    .laboratorio {
+      padding: .5rem 0 3rem;
+    }
+
+
+    .etapa {
+      padding: 1.3rem;
+    }
+
+
+    .lab-header {
+      padding: 1.7rem 1.3rem;
+    }
+
+
+    .situacion,
+    .mision,
+    .desafio {
+      flex-direction: column;
+    }
+
+
+    .desafio-form {
+      grid-template-columns: 1fr;
+    }
+
+
+    .aprendizajes {
+      grid-template-columns: 1fr;
+    }
+
+
+    .formula-constructor {
+      font-size: 1.2rem;
+    }
+
+
+    .formula-constructor input {
+      width: 100px;
+    }
+
+
+    .geogebra-contenedor,
+    .geogebra-app {
+      min-height: 450px;
+    }
+
+
+    .calculo {
+      flex-direction: column;
+    }
+
+
+    .radio-grupo {
+      flex-direction: column;
+    }
+
+
+    .radio-grupo label {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+  }
+
+</style>
+
+
+<!-- =========================================
+     GEOGEBRA API
+========================================== -->
+
+<script
+  is:inline
+  src="https://www.geogebra.org/apps/deployggb.js"
+></script>
+
+
+<script>
+
+  /* =========================================
+     VARIABLES GLOBALES
+  ========================================== */
+
+  let modeloConstruido = {
+    m: 10000,
+    b: 20000
+  };
+
+
+  let geogebraApp = null;
+  let geogebraAPI = null;
+
+
+  /* =========================================
+     FUNCIONES GENERALES
+  ========================================== */
+
+  function mostrarFeedback(
+    id,
+    mensaje,
+    tipo
+  ) {
+
+    const elemento =
+      document.getElementById(id);
+
+    if (!elemento) return;
+
+    elemento.innerHTML = mensaje;
+
+    elemento.className =
+      `feedback mostrar ${tipo}`;
+
+  }
+
+
+  function marcarCampo(
+    elemento,
+    correcto
+  ) {
+
+    if (!elemento) return;
+
+    elemento.classList.remove(
+      'campo-correcto',
+      'campo-incorrecto'
+    );
+
+    elemento.classList.add(
+      correcto
+        ? 'campo-correcto'
+        : 'campo-incorrecto'
+    );
+
+  }
+
+
+  function desbloquearEtapa(
+    numero
+  ) {
+
+    const etapa =
+      document.querySelector(
+        `[data-etapa="${numero}"]`
+      );
+
+    if (!etapa) return;
+
+    etapa.classList.remove(
+      'bloqueada'
+    );
+
+
+    setTimeout(() => {
+
+      etapa.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+    }, 150);
+
+  }
+
+
+  function mostrarFinal() {
+
+    const final =
+      document.querySelector(
+        '[data-etapa="8"]'
+      );
+
+    if (!final) return;
+
+    final.classList.remove(
+      'bloqueada'
+    );
+
+
+    setTimeout(() => {
+
+      final.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+    }, 150);
+
+  }
+
+
+  /* =========================================
+     CREAR GEOGEBRA
+  ========================================== */
+
+  function inicializarGeoGebra() {
+
+    const contenedor =
+      document.getElementById(
+        'ggb-element'
+      );
+
+    if (!contenedor) return;
+
+
+    if (
+      typeof window.GGBApplet ===
+      'undefined'
+    ) {
+
+      console.error(
+        'GeoGebra deployggb.js todavía no está disponible.'
+      );
+
+      return;
+
+    }
+
+
+    const parametros = {
+
+      appName: 'graphing',
+
+      width: contenedor.clientWidth || 900,
+
+      height: 500,
+
+      material_id: 'ekcujuc6',
+
+      showToolBar: false,
+
+      showAlgebraInput: false,
+
+      showMenuBar: false,
+
+      showResetIcon: true,
+
+      enableRightClick: false,
+
+      enableLabelDrags: false,
+
+      showZoomButtons: true,
+
+      showFullscreenButton: true,
+
+      showAnimationButton: false,
+
+      showSuggestionButtons: false,
+
+      borderColor: '#888888',
+
+
+      appletOnLoad: function(api) {
+
+        geogebraAPI = api;
+
+
+        const loading =
+          document.getElementById(
+            'ggb-loading'
+          );
+
+
+        if (loading) {
+
+          loading.classList.add(
+            'oculto'
+          );
+
+        }
+
+
+        /*
+
+          Cuando GeoGebra termina de cargar,
+          enviamos el modelo que construyó
+          el estudiante.
+
+        */
+
+        actualizarGeoGebra();
+
+      }
+
+    };
+
+
+    geogebraApp =
+      new GGBApplet(
+        parametros,
+        true
+      );
+
+
+    geogebraApp.inject(
+      'ggb-element'
+    );
+
+  }
+
+
+  /* =========================================
+     ACTUALIZAR MODELO EN GEOGEBRA
+  ========================================== */
+
+  function actualizarGeoGebra() {
+
+    if (!geogebraAPI) return;
+
+
+    const m =
+      Number(modeloConstruido.m);
+
+    const b =
+      Number(modeloConstruido.b);
+
+
+    if (
+      !Number.isFinite(m) ||
+      !Number.isFinite(b)
+    ) {
+      return;
+    }
+
+
+    /*
+      Eliminamos la función anterior
+      si existe.
+    */
+
+    try {
+
+      geogebraAPI.deleteObject(
+        'f'
+      );
+
+    } catch (error) {
+
+      console.log(
+        'No había una función anterior.'
+      );
+
+    }
+
+
+    /*
+      Creamos la nueva función.
+
+      La API de GeoGebra permite ejecutar
+      comandos mediante evalCommand().
+    */
+
+    geogebraAPI.evalCommand(
+      `f(x)=${m}*x+${b}`
+    );
+
+
+    /*
+      Punto inicial.
+
+      Representa el dinero que tenía
+      Camila cuando x = 0.
+    */
+
+    geogebraAPI.evalCommand(
+      `A=(0,${b})`
+    );
+
+
+    /*
+      Punto después de 10 semanas.
+    */
+
+    geogebraAPI.evalCommand(
+      `B=(10,${m * 10 + b})`
+    );
+
+
+    /*
+      Segmento visual entre ambos puntos.
+    */
+
+    geogebraAPI.evalCommand(
+      's=Segment(A,B)'
+    );
+
+
+    /*
+      Ajustamos automáticamente
+      la vista para mostrar los objetos.
+    */
+
+    setTimeout(() => {
+
+      try {
+
+        geogebraAPI.showAllObjects();
+
+      } catch (error) {
+
+        console.log(
+          'No fue posible ajustar la vista.'
+        );
+
+      }
+
+    }, 300);
+
+
+    /*
+      Mostramos la expresión fuera
+      de GeoGebra.
+    */
+
+    const texto =
+      document.getElementById(
+        'modelo-geogebra-texto'
+      );
+
+
+    if (texto) {
+
+      const signo =
+        b >= 0
+          ? '+'
+          : '-';
+
+
+      texto.textContent =
+        `f(x) = ${m}x ${signo} ${Math.abs(b)}`;
+
+    }
+
+  }
+
+
+  /* =========================================
+     ETAPA 1
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa1')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const seleccionados = [
+          ...document.querySelectorAll(
+            '[data-etapa="1"] input[type="checkbox"]:checked'
+          )
+        ].map(
+          input => input.value
+        );
+
+
+        const correctos = [
+          'semanas',
+          'ahorro',
+          'inicial'
+        ];
+
+
+        const esCorrecto =
+          seleccionados.length ===
+            correctos.length &&
+          correctos.every(
+            item =>
+              seleccionados.includes(item)
+          );
+
+
+        if (esCorrecto) {
+
+          mostrarFeedback(
+            'feedback1',
+
+            '✅ ¡Muy bien! Identificaste la información necesaria para construir el modelo.',
+
+            'correcto'
+          );
+
+
+          desbloquearEtapa(2);
+
+        } else {
+
+          mostrarFeedback(
+            'feedback1',
+
+            '💡 Revisa tu selección. Piensa qué datos permiten conocer el tiempo, el cambio del ahorro y el punto de partida.',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     ETAPA 2
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa2')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const respuestas = {
+
+          0: 20000,
+          1: 30000,
+          2: 40000,
+          3: 50000,
+          4: 60000,
+          5: 70000
+
+        };
+
+
+        let todosCorrectos = true;
+
+
+        document
+          .querySelectorAll(
+            '.tabla-input'
+          )
+          .forEach(
+            input => {
+
+              const semana =
+                input.dataset.semana;
+
+              const valor =
+                Number(input.value);
+
+              const correcto =
+                valor ===
+                respuestas[semana];
+
+
+              marcarCampo(
+                input,
+                correcto
+              );
+
+
+              if (!correcto) {
+
+                todosCorrectos =
+                  false;
+
+              }
+
+            }
+          );
+
+
+        if (todosCorrectos) {
+
+          mostrarFeedback(
+            'feedback2',
+
+            '✅ ¡Excelente! La tabla muestra cómo aumenta el dinero semana tras semana.',
+
+            'correcto'
+          );
+
+
+          desbloquearEtapa(3);
+
+        } else {
+
+          mostrarFeedback(
+            'feedback2',
+
+            '💡 Observa el valor de la semana 0 y compara cuánto cambia el dinero entre una semana y la siguiente.',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     ETAPA 3
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa3')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const aumento =
+          document.querySelector(
+            'input[name="aumento"]:checked'
+          )?.value;
+
+
+        const inicial =
+          document.querySelector(
+            'input[name="inicial"]:checked'
+          )?.value;
+
+
+        const correcto =
+          aumento === '10000' &&
+          inicial === '20000';
+
+
+        if (correcto) {
+
+          mostrarFeedback(
+            'feedback3',
+
+            '✅ ¡Correcto! Encontraste los dos elementos fundamentales del modelo: el cambio constante y el valor inicial.',
+
+            'correcto'
+          );
+
+
+          desbloquearEtapa(4);
+
+        } else {
+
+          mostrarFeedback(
+            'feedback3',
+
+            '💡 Revisa la tabla: compara dos semanas consecutivas para encontrar el aumento y observa la semana 0 para identificar el valor inicial.',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     ETAPA 4
+     CONSTRUCCIÓN DEL MODELO
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa4')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const inputM =
+          document.getElementById(
+            'coeficienteM'
+          );
+
+
+        const inputB =
+          document.getElementById(
+            'terminoB'
+          );
+
+
+        const m =
+          Number(inputM?.value);
+
+
+        const b =
+          Number(inputB?.value);
+
+
+        const correctoM =
+          m === 10000;
+
+
+        const correctoB =
+          b === 20000;
+
+
+        marcarCampo(
+          inputM,
+          correctoM
+        );
+
+
+        marcarCampo(
+          inputB,
+          correctoB
+        );
+
+
+        if (
+          correctoM &&
+          correctoB
+        ) {
+
+
+          /*
+            Guardamos el modelo
+            construido por el estudiante.
+          */
+
+          modeloConstruido = {
+            m,
+            b
+          };
+
+
+          mostrarFeedback(
+            'feedback4',
+
+            '🎉 ¡Excelente! Construiste correctamente el modelo matemático. Ahora vamos a llevarlo a GeoGebra.',
+
+            'correcto'
+          );
+
+
+          /*
+            Desbloqueamos GeoGebra.
+          */
+
+          desbloquearEtapa(5);
+
+
+          /*
+            Preparamos la etapa 6.
+          */
+
+          setTimeout(
+            () => {
+
+              desbloquearEtapa(6);
+
+            },
+            400
+          );
+
+
+          /*
+            Si GeoGebra ya está cargado,
+            actualizamos inmediatamente.
+          */
+
+          setTimeout(
+            () => {
+
+              actualizarGeoGebra();
+
+            },
+            600
+          );
+
+
+        } else {
+
+          mostrarFeedback(
+            'feedback4',
+
+            '💡 Revisa qué cantidad representa el cambio semanal y cuál corresponde al valor inicial. Recuerda la estructura f(x) = mx + b.',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     ETAPA 5
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa5')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const input =
+          document.getElementById(
+            'resultado10'
+          );
+
+
+        const resultado =
+          Number(input?.value);
+
+
+        const correcto =
+          resultado === 120000;
+
+
+        marcarCampo(
+          input,
+          correcto
+        );
+
+
+        if (correcto) {
+
+          mostrarFeedback(
+            'feedback5',
+
+            '🎯 ¡Predicción correcta! Utilizaste el modelo para calcular un valor que no estaba en la tabla inicial.',
+
+            'correcto'
+          );
+
+
+          mostrarFeedback(
+            'feedback5',
+
+            '🎯 ¡Predicción correcta! Ahora observa cómo ese modelo se representa gráficamente en GeoGebra.',
+
+            'correcto'
+          );
+
+
+          desbloquearEtapa(6);
+
+
+          setTimeout(
+            () => {
+
+              actualizarGeoGebra();
+
+            },
+            300
+          );
+
+
+        } else {
+
+          mostrarFeedback(
+            'feedback5',
+
+            '💡 Utiliza el modelo que construiste y sustituye x por 10. Después realiza las operaciones paso a paso.',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     ETAPA 6
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa6')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const grafica =
+          document.querySelector(
+            'input[name="grafica"]:checked'
+          )?.value;
+
+
+        const ejeY =
+          document.querySelector(
+            'input[name="ejeY"]:checked'
+          )?.value;
+
+
+        const pendiente =
+          document.querySelector(
+            'input[name="pendiente"]:checked'
+          )?.value;
+
+
+        const correcto =
+          grafica === 'creciente' &&
+          ejeY === 'inicial' &&
+          pendiente === 'semanal';
+
+
+        if (correcto) {
+
+          mostrarFeedback(
+            'feedback6',
+
+            '🌟 ¡Muy bien! Relacionaste la expresión algebraica con su representación gráfica. La pendiente muestra el cambio semanal y el intercepto muestra el valor inicial.',
+
+            'correcto'
+          );
+
+
+          desbloquearEtapa(7);
+
+        } else {
+
+          mostrarFeedback(
+            'feedback6',
+
+            '💡 Observa nuevamente la gráfica. Pregúntate: ¿hacia dónde sube la recta?, ¿qué valor representa cuando x = 0? y ¿qué información produce su inclinación?',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     ETAPA 7
+  ========================================== */
+
+  document
+    .getElementById('btnEtapa7')
+    ?.addEventListener(
+      'click',
+      () => {
+
+        const x =
+          document.getElementById(
+            'juanX'
+          );
+
+
+        const fx =
+          document.getElementById(
+            'juanFx'
+          );
+
+
+        const m =
+          document.getElementById(
+            'juanM'
+          );
+
+
+        const b =
+          document.getElementById(
+            'juanB'
+          );
+
+
+        const resultado =
+          document.getElementById(
+            'juanResultado'
+          );
+
+
+        const textoX =
+          x.value
+            .trim()
+            .toLowerCase();
+
+
+        const textoFx =
+          fx.value
+            .trim()
+            .toLowerCase();
+
+
+        const correctoX =
+          textoX.includes(
+            'semana'
+          );
+
+
+        const correctoFx =
+          textoFx.includes(
+            'dinero'
+          );
+
+
+        const correctoM =
+          Number(m.value) ===
+          15000;
+
+
+        const correctoB =
+          Number(b.value) ===
+          50000;
+
+
+        marcarCampo(
+          x,
+          correctoX
+        );
+
+
+        marcarCampo(
+          fx,
+          correctoFx
+        );
+
+
+        marcarCampo(
+          m,
+          correctoM
+        );
+
+
+        marcarCampo(
+          b,
+          correctoB
+        );
+
+
+        const valoresTabla = {
+
+          0: 50000,
+          2: 80000,
+          4: 110000,
+          6: 140000
+
+        };
+
+
+        let tablaCorrecta =
+          true;
+
+
+        document
+          .querySelectorAll(
+            '.juan-tabla'
+          )
+          .forEach(
+            input => {
+
+              const semana =
+                input.dataset.semanaJuan;
+
+
+              const valor =
+                Number(input.value);
+
+
+              const correcto =
+                valor ===
+                valoresTabla[semana];
+
+
+              marcarCampo(
+                input,
+                correcto
+              );
+
+
+              if (!correcto) {
+
+                tablaCorrecta =
+                  false;
+
+              }
+
+            }
+          );
+
+
+        const resultadoCorrecto =
+          Number(resultado.value) ===
+          170000;
+
+
+        marcarCampo(
+          resultado,
+          resultadoCorrecto
+        );
+
+
+        const todoCorrecto =
+          correctoX &&
+          correctoFx &&
+          correctoM &&
+          correctoB &&
+          tablaCorrecta &&
+          resultadoCorrecto;
+
+
+        if (todoCorrecto) {
+
+          mostrarFeedback(
+            'feedback7',
+
+            '🏆 ¡Desafío superado! Construiste un modelo lineal completo a partir de una nueva situación.',
+
+            'correcto'
+          );
+
+
+          mostrarFinal();
+
+        } else {
+
+          mostrarFeedback(
+            'feedback7',
+
+            '💡 Revisa cada parte del modelo. Primero identifica las variables, después determina el cambio constante y el valor inicial. Finalmente usa tu función para completar la tabla y hacer la predicción.',
+
+            'incorrecto'
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     INICIALIZAR GEOGEBRA
+  ========================================== */
+
+  function esperarGeoGebra() {
+
+    const etapa6 =
+      document.querySelector(
+        '[data-etapa="6"]'
+      );
+
+
+    if (!etapa6) return;
+
+
+    /*
+      GeoGebra se inicializa cuando
+      el componente ya está disponible.
+    */
+
+    const iniciar =
+      () => {
+
+        try {
+
+          inicializarGeoGebra();
+
+        } catch (error) {
+
+          console.error(
+            'Error iniciando GeoGebra:',
+            error
+          );
+
+        }
+
+      };
+
+
+    /*
+      Esperamos un poco para asegurar
+      que deployggb.js haya cargado.
+    */
+
+    if (
+      typeof window.GGBApplet !==
+      'undefined'
+    ) {
+
+      iniciar();
+
+    } else {
+
+      setTimeout(
+        esperarGeoGebra,
+        300
+      );
+
+    }
+
+  }
+
+
+  /*
+    Astro puede ejecutar este script
+    después de cargar la página.
+  */
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      esperarGeoGebra
+    );
+
+  } else {
+
+    esperarGeoGebra();
+
+  }
+
+</script>

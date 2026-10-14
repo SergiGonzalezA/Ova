@@ -1,0 +1,464 @@
+---
+const funciones = [
+  {
+    id: 'f',
+    expresion: 'f(x) = 3x + 2',
+    pendiente: '3',
+    intercepto: '2',
+    comportamiento: 'creciente'
+  },
+  {
+    id: 'g',
+    expresion: 'g(x) = 3x - 5',
+    pendiente: '3',
+    intercepto: '-5',
+    comportamiento: 'creciente'
+  },
+  {
+    id: 'h',
+    expresion: 'h(x) = -2x + 2',
+    pendiente: '-2',
+    intercepto: '2',
+    comportamiento: 'decreciente'
+  }
+];
+---
+
+<section class="laboratorio">
+
+  <div class="encabezado">
+    <span class="etiqueta">LABORATORIO</span>
+    <h2>🔎 Analicemos funciones lineales</h2>
+    <p>
+      Observa cada expresión y determina su pendiente, su intercepto
+      y su comportamiento.
+    </p>
+  </div>
+
+  <div class="instruccion">
+    <strong>💡 Recuerda:</strong>
+    En una función de la forma
+    <span class="formula">f(x) = mx + b</span>,
+    <strong>m</strong> representa la pendiente y
+    <strong>b</strong> representa el intercepto con el eje Y.
+  </div>
+
+  <div class="tabla-contenedor">
+    <table>
+      <thead>
+        <tr>
+          <th>Función</th>
+          <th>Pendiente <em>m</em></th>
+          <th>Intercepto <em>b</em></th>
+          <th>Comportamiento</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {funciones.map((funcion) => (
+          <tr data-funcion={funcion.id}>
+
+            <td class="expresion">
+              {funcion.expresion}
+            </td>
+
+            <td>
+              <input
+                type="text"
+                class="respuesta"
+                data-tipo="pendiente"
+                placeholder="m"
+                aria-label={`Pendiente de ${funcion.expresion}`}
+              />
+            </td>
+
+            <td>
+              <input
+                type="text"
+                class="respuesta"
+                data-tipo="intercepto"
+                placeholder="b"
+                aria-label={`Intercepto de ${funcion.expresion}`}
+              />
+            </td>
+
+            <td>
+              <select
+                class="respuesta"
+                data-tipo="comportamiento"
+                aria-label={`Comportamiento de ${funcion.expresion}`}
+              >
+                <option value="">Selecciona...</option>
+                <option value="creciente">Creciente</option>
+                <option value="decreciente">Decreciente</option>
+              </select>
+            </td>
+
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="acciones">
+    <button id="comprobar" class="btn-comprobar">
+      ✓ Comprobar respuestas
+    </button>
+
+    <button id="reiniciar" class="btn-reiniciar">
+      ↻ Reiniciar
+    </button>
+  </div>
+
+  <div id="resultado" class="resultado" hidden></div>
+
+  <div id="retroalimentacion" class="retroalimentacion" hidden></div>
+
+</section>
+
+<script define:vars={{ funciones }}>
+
+  const botonComprobar = document.querySelector('#comprobar');
+  const botonReiniciar = document.querySelector('#reiniciar');
+  const resultado = document.querySelector('#resultado');
+  const retroalimentacion = document.querySelector('#retroalimentacion');
+
+  botonComprobar?.addEventListener('click', () => {
+
+    let correctas = 0;
+    let total = funciones.length * 3;
+
+    funciones.forEach((funcion) => {
+
+      const fila = document.querySelector(
+        `[data-funcion="${funcion.id}"]`
+      );
+
+      if (!fila) return;
+
+      const inputPendiente = fila.querySelector(
+        '[data-tipo="pendiente"]'
+      );
+
+      const inputIntercepto = fila.querySelector(
+        '[data-tipo="intercepto"]'
+      );
+
+      const inputComportamiento = fila.querySelector(
+        '[data-tipo="comportamiento"]'
+      );
+
+      // Limpiar estados anteriores
+      [
+        inputPendiente,
+        inputIntercepto,
+        inputComportamiento
+      ].forEach((elemento) => {
+        elemento?.classList.remove('correcto', 'incorrecto');
+      });
+
+      // Normalizar respuestas
+      const pendiente = inputPendiente?.value.trim().replace(',', '.');
+      const intercepto = inputIntercepto?.value.trim().replace(',', '.');
+      const comportamiento = inputComportamiento?.value;
+
+      // Validar pendiente
+      if (pendiente === funcion.pendiente) {
+        inputPendiente?.classList.add('correcto');
+        correctas++;
+      } else {
+        inputPendiente?.classList.add('incorrecto');
+      }
+
+      // Validar intercepto
+      if (intercepto === funcion.intercepto) {
+        inputIntercepto?.classList.add('correcto');
+        correctas++;
+      } else {
+        inputIntercepto?.classList.add('incorrecto');
+      }
+
+      // Validar comportamiento
+      if (comportamiento === funcion.comportamiento) {
+        inputComportamiento?.classList.add('correcto');
+        correctas++;
+      } else {
+        inputComportamiento?.classList.add('incorrecto');
+      }
+
+    });
+
+    const porcentaje = Math.round((correctas / total) * 100);
+
+    resultado.hidden = false;
+
+    if (porcentaje === 100) {
+
+      resultado.className = 'resultado excelente';
+
+      resultado.innerHTML = `
+        <strong>🎉 ¡Excelente trabajo!</strong>
+        <span>Obtuviste ${correctas} de ${total} respuestas correctas.</span>
+      `;
+
+      retroalimentacion.hidden = false;
+
+      retroalimentacion.innerHTML = `
+        <h3>🧠 ¿Qué descubriste?</h3>
+        <p>
+          Cuando la pendiente <strong>m</strong> es positiva,
+          la función es <strong>creciente</strong>.
+        </p>
+        <p>
+          Cuando la pendiente <strong>m</strong> es negativa,
+          la función es <strong>decreciente</strong>.
+        </p>
+        <p>
+          El valor de <strong>b</strong> indica dónde la recta
+          corta el eje Y.
+        </p>
+      `;
+
+    } else {
+
+      resultado.className = 'resultado necesita-revision';
+
+      resultado.innerHTML = `
+        <strong>🔎 Revisa tus respuestas</strong>
+        <span>
+          Obtuviste ${correctas} de ${total} respuestas correctas (${porcentaje}%).
+        </span>
+      `;
+
+      retroalimentacion.hidden = false;
+
+      retroalimentacion.innerHTML = `
+        <h3>💡 Pista</h3>
+        <p>
+          Recuerda observar los signos de los números.
+          Una pendiente positiva indica una función creciente,
+          mientras que una pendiente negativa indica una función decreciente.
+        </p>
+        <p>
+          En <strong>f(x) = mx + b</strong>,
+          el número que acompaña a <strong>x</strong> es la pendiente
+          y el término independiente es el intercepto.
+        </p>
+      `;
+    }
+
+  });
+
+
+  botonReiniciar?.addEventListener('click', () => {
+
+    document
+      .querySelectorAll('.respuesta')
+      .forEach((elemento) => {
+
+        elemento.value = '';
+
+        elemento.classList.remove(
+          'correcto',
+          'incorrecto'
+        );
+
+      });
+
+    resultado.hidden = true;
+    retroalimentacion.hidden = true;
+
+  });
+
+</script>
+
+<style>
+
+  .laboratorio {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--sl-color-gray-5);
+    background: var(--sl-color-bg);
+  }
+
+  .encabezado {
+    margin-bottom: 1.5rem;
+  }
+
+  .etiqueta {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: var(--sl-color-accent-low);
+    color: var(--sl-color-accent-high);
+  }
+
+  h2 {
+    margin: 0.7rem 0 0.5rem;
+  }
+
+  .encabezado p {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+  }
+
+  .instruccion {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-left: 4px solid var(--sl-color-accent);
+    border-radius: 8px;
+    background: var(--sl-color-gray-6);
+  }
+
+  .formula {
+    display: inline-block;
+    margin: 0 0.3rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-family: monospace;
+    font-weight: 700;
+  }
+
+  .tabla-contenedor {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+
+  th,
+  td {
+    padding: 0.9rem;
+    border: 1px solid var(--sl-color-gray-5);
+    text-align: center;
+  }
+
+  th {
+    font-weight: 700;
+    background: var(--sl-color-gray-6);
+  }
+
+  .expresion {
+    font-family: monospace;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  input,
+  select {
+    width: 100%;
+    min-width: 100px;
+    padding: 0.65rem;
+    border: 2px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-white);
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--sl-color-accent);
+  }
+
+  .correcto {
+    border-color: #22c55e !important;
+    background: rgba(34, 197, 94, 0.12) !important;
+  }
+
+  .incorrecto {
+    border-color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.12) !important;
+  }
+
+  .acciones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  button {
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-comprobar {
+    background: var(--sl-color-accent);
+    color: white;
+  }
+
+  .btn-reiniciar {
+    background: var(--sl-color-gray-5);
+    color: var(--sl-color-text);
+  }
+
+  .resultado {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .resultado.excelente {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid #22c55e;
+  }
+
+  .resultado.necesita-revision {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid #f59e0b;
+  }
+
+  .retroalimentacion {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: var(--sl-color-gray-6);
+  }
+
+  .retroalimentacion h3 {
+    margin-top: 0;
+  }
+
+  @media (max-width: 700px) {
+
+    .laboratorio {
+      padding: 1rem;
+    }
+
+    th,
+    td {
+      padding: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    input,
+    select {
+      min-width: 90px;
+    }
+
+  }
+
+</style>

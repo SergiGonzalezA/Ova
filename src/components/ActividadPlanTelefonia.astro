@@ -1,0 +1,1058 @@
+---
+import GeoGebra from "./GeoGebraApplet.astro";
+const geogebraId = "syhq88ad";
+---
+
+<section class="actividad" id="actividadTelefonia">
+  <div class="encabezado">
+    <span class="etiqueta">Laboratorio interactivo</span>
+    <h1>📱 ¿Qué plan de telefonía me conviene?</h1>
+    <p>
+      Analiza una situación cotidiana utilizando tablas, expresiones
+      algebraicas y la representación gráfica de una función lineal.
+    </p>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progreso-container">
+    <div class="progreso-info">
+      <span>Progreso de la actividad</span>
+      <strong id="progresoTexto">0 / 5</strong>
+    </div>
+
+    <div class="barra">
+      <div id="barraProgreso"></div>
+    </div>
+  </div>
+
+  <!-- SITUACIÓN PROBLEMA -->
+  <article class="card">
+    <div class="card-header">
+      <span class="numero">1</span>
+      <div>
+        <h2>La situación</h2>
+        <p>Lee cuidadosamente el problema.</p>
+      </div>
+    </div>
+
+    <div class="problema">
+      <p>
+        Camila necesita contratar un plan de telefonía móvil. Una empresa
+        ofrece un plan con un costo fijo de <strong>$15.000</strong> y cobra
+        <strong>$10.000 por cada GB adicional</strong> consumido.
+      </p>
+
+      <p>
+        El costo total depende de la cantidad de GB que Camila utilice durante
+        el mes.
+      </p>
+    </div>
+
+    <div class="datos">
+      <div>
+        <span>💰 Costo fijo</span>
+        <strong>$15.000</strong>
+      </div>
+
+      <div>
+        <span>📶 Costo por GB</span>
+        <strong>$10.000</strong>
+      </div>
+    </div>
+  </article>
+
+  <!-- PASO 1 -->
+  <article class="card actividad-card" data-paso="1">
+    <div class="card-header">
+      <span class="numero">2</span>
+      <div>
+        <h2>Comprendamos el problema</h2>
+        <p>Identifica las variables de la situación.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <label for="variableIndependiente">
+        1. ¿Cuál es la variable independiente?
+      </label>
+
+      <select id="variableIndependiente">
+        <option value="">Selecciona una opción</option>
+        <option value="costo">El costo total</option>
+        <option value="gb">La cantidad de GB consumidos</option>
+        <option value="fijo">El costo fijo</option>
+      </select>
+
+      <div class="feedback" id="feedback1"></div>
+    </div>
+
+    <div class="pregunta">
+      <label for="variableDependiente">
+        2. ¿Cuál es la variable dependiente?
+      </label>
+
+      <select id="variableDependiente">
+        <option value="">Selecciona una opción</option>
+        <option value="gb">La cantidad de GB consumidos</option>
+        <option value="costo">El costo total</option>
+        <option value="fijo">El costo fijo</option>
+      </select>
+
+      <div class="feedback" id="feedback2"></div>
+    </div>
+
+    <button class="btn btn-primary" id="btnPaso1">
+      Comprobar respuestas
+    </button>
+  </article>
+
+  <!-- TABLA -->
+  <article class="card actividad-card" data-paso="2">
+    <div class="card-header">
+      <span class="numero">3</span>
+      <div>
+        <h2>Construye la tabla</h2>
+        <p>
+          Calcula cuánto pagaría Camila según los GB consumidos.
+        </p>
+      </div>
+    </div>
+
+    <div class="formula-ayuda">
+      <span>💡 Recuerda:</span>
+      <p>
+        Costo total = costo fijo + (costo por GB × GB consumidos)
+      </p>
+    </div>
+
+    <div class="tabla-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>GB consumidos</th>
+            <th>Costo total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>0 GB</td>
+            <td>$ <input class="tabla-input" id="tabla0" type="number" /></td>
+          </tr>
+
+          <tr>
+            <td>1 GB</td>
+            <td>$ <input class="tabla-input" id="tabla1" type="number" /></td>
+          </tr>
+
+          <tr>
+            <td>2 GB</td>
+            <td>$ <input class="tabla-input" id="tabla2" type="number" /></td>
+          </tr>
+
+          <tr>
+            <td>3 GB</td>
+            <td>$ <input class="tabla-input" id="tabla3" type="number" /></td>
+          </tr>
+
+          <tr>
+            <td>4 GB</td>
+            <td>$ <input class="tabla-input" id="tabla4" type="number" /></td>
+          </tr>
+
+          <tr>
+            <td>5 GB</td>
+            <td>$ <input class="tabla-input" id="tabla5" type="number" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="feedback" id="feedbackTabla"></div>
+
+    <button class="btn btn-primary" id="btnTabla">
+      Comprobar tabla
+    </button>
+  </article>
+
+  <!-- FUNCIÓN -->
+  <article class="card actividad-card" data-paso="3">
+    <div class="card-header">
+      <span class="numero">4</span>
+      <div>
+        <h2>Encuentra la función</h2>
+        <p>
+          Utiliza los datos de la tabla para construir la expresión algebraica.
+        </p>
+      </div>
+    </div>
+
+    <div class="funcion-box">
+      <span>C(x) =</span>
+
+      <input
+        type="text"
+        id="coeficiente"
+        placeholder="coeficiente"
+        aria-label="Coeficiente"
+      />
+
+      <span>x +</span>
+
+      <input
+        type="text"
+        id="terminoIndependiente"
+        placeholder="término independiente"
+        aria-label="Término independiente"
+      />
+    </div>
+
+    <p class="pista">
+      💡 La pendiente indica cuánto aumenta el costo por cada GB.
+    </p>
+
+    <div class="feedback" id="feedbackFuncion"></div>
+
+    <button class="btn btn-primary" id="btnFuncion">
+      Comprobar función
+    </button>
+  </article>
+
+  <!-- GEOGEBRA -->
+  <article class="card geogebra-card actividad-card" data-paso="4">
+    <div class="card-header">
+      <span class="numero">5</span>
+      <div>
+        <h2>Explora la función en GeoGebra</h2>
+        <p>
+          Utiliza el applet para comprobar y analizar tu modelo matemático.
+        </p>
+      </div>
+    </div>
+
+    <div class="instrucciones">
+      <h3>🔎 Explora</h3>
+
+      <ol>
+        <li>Observa la gráfica de la función.</li>
+        <li>Busca el punto donde la recta corta el eje vertical.</li>
+        <li>Mueve el punto sobre la recta si el applet lo permite.</li>
+        <li>Observa cómo cambia el costo cuando aumenta el consumo.</li>
+      </ol>
+    </div>
+
+   <div class="geogebra-container">
+  <GeoGebra
+    materialId={geogebraId}
+  />
+</div>
+
+    <div class="geogebra-nota">
+      <strong>💡 Recuerda:</strong>
+      La gráfica representa la relación entre los GB consumidos y el costo
+      total del plan.
+    </div>
+  </article>
+
+  <!-- ANÁLISIS -->
+  <article class="card actividad-card" data-paso="5">
+    <div class="card-header">
+      <span class="numero">6</span>
+      <div>
+        <h2>Analiza la gráfica</h2>
+        <p>Utiliza lo observado en GeoGebra para responder.</p>
+      </div>
+    </div>
+
+    <!-- Pregunta 1 -->
+    <div class="pregunta">
+      <label for="analisis1">
+        1. ¿Qué representa el punto donde la recta corta el eje vertical?
+      </label>
+
+      <select id="analisis1">
+        <option value="">Selecciona una opción</option>
+        <option value="pendiente">El costo por cada GB</option>
+        <option value="fijo">El costo fijo del plan</option>
+        <option value="consumo">La cantidad máxima de GB</option>
+      </select>
+    </div>
+
+    <!-- Pregunta 2 -->
+    <div class="pregunta">
+      <label for="analisis2">
+        2. ¿Qué representa la pendiente de la función?
+      </label>
+
+      <select id="analisis2">
+        <option value="">Selecciona una opción</option>
+        <option value="fijo">El costo fijo</option>
+        <option value="gb">El costo adicional por cada GB</option>
+        <option value="total">El costo total del plan</option>
+      </select>
+    </div>
+
+    <!-- Pregunta 3 -->
+    <div class="pregunta">
+      <label for="analisis3">
+        3. ¿Cuánto pagará Camila si consume 7 GB?
+      </label>
+
+      <div class="input-prefix">
+        <span>$</span>
+        <input
+          type="number"
+          id="analisis3"
+          placeholder="Escribe el valor"
+        />
+      </div>
+    </div>
+
+    <!-- Pregunta 4 -->
+    <div class="pregunta">
+      <label for="analisis4">
+        4. Si Camila dispone de $75.000, ¿cuántos GB puede consumir?
+      </label>
+
+      <div class="input-sufix">
+        <input
+          type="number"
+          id="analisis4"
+          placeholder="Escribe los GB"
+        />
+        <span>GB</span>
+      </div>
+    </div>
+
+    <!-- Pregunta 5 -->
+    <div class="pregunta">
+      <label for="analisis5">
+        5. ¿Qué ocurre con el costo cuando aumenta el consumo de GB?
+      </label>
+
+      <select id="analisis5">
+        <option value="">Selecciona una opción</option>
+        <option value="disminuye">El costo disminuye</option>
+        <option value="constante">El costo permanece constante</option>
+        <option value="aumenta">El costo aumenta</option>
+      </select>
+    </div>
+
+    <div class="feedback" id="feedbackAnalisis"></div>
+
+    <button class="btn btn-success" id="btnFinalizar">
+      Finalizar actividad
+    </button>
+  </article>
+
+  <!-- RESULTADO -->
+  <article class="resultado hidden" id="resultado">
+    <div class="resultado-icono">🎉</div>
+
+    <h2>¡Actividad completada!</h2>
+
+    <p>
+      Has utilizado tablas, expresiones algebraicas y la representación gráfica
+      para analizar una función lineal.
+    </p>
+
+    <div class="puntaje">
+      <span>Tu puntaje</span>
+      <strong id="puntajeFinal">0 / 10</strong>
+    </div>
+
+    <p id="mensajeFinal"></p>
+
+    <button class="btn btn-secondary" id="btnReiniciar">
+      Reiniciar actividad
+    </button>
+  </article>
+</section>
+
+<style>
+  .actividad {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+    color: var(--sl-color-text, #1f2937);
+  }
+
+  .encabezado {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .etiqueta {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: #e0f2fe;
+    color: #0369a1;
+    margin-bottom: 0.8rem;
+  }
+
+  .encabezado h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+  }
+
+  .encabezado p {
+    max-width: 700px;
+    margin: 0.8rem auto;
+    line-height: 1.6;
+  }
+
+  /* PROGRESO */
+
+  .progreso-container {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6, #f3f4f6);
+  }
+
+  .progreso-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .barra {
+    height: 10px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #d1d5db;
+  }
+
+  #barraProgreso {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: #2563eb;
+    transition: width 0.4s ease;
+  }
+
+  /* CARDS */
+
+  .card {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--sl-color-gray-5, #e5e7eb);
+    border-radius: 16px;
+    background: var(--sl-color-bg, white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.3rem;
+  }
+
+  .card-header h2 {
+    margin: 0;
+    font-size: 1.35rem;
+  }
+
+  .card-header p {
+    margin: 0.2rem 0 0;
+    opacity: 0.7;
+  }
+
+  .numero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    font-weight: 800;
+  }
+
+  /* PROBLEMA */
+
+  .problema {
+    padding: 1.2rem;
+    border-left: 5px solid #2563eb;
+    border-radius: 8px;
+    background: var(--sl-color-gray-6, #f8fafc);
+    line-height: 1.7;
+  }
+
+  .datos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .datos div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #eff6ff;
+  }
+
+  .datos span {
+    font-size: 0.85rem;
+  }
+
+  .datos strong {
+    font-size: 1.2rem;
+  }
+
+  /* PREGUNTAS */
+
+  .pregunta {
+    margin-bottom: 1.4rem;
+  }
+
+  .pregunta label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+  }
+
+  select,
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    color: #111827;
+  }
+
+  select:focus,
+  input:focus {
+    outline: 2px solid #93c5fd;
+    border-color: #2563eb;
+  }
+
+  /* TABLA */
+
+  .tabla-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.8rem;
+    border: 1px solid #dbeafe;
+    text-align: center;
+  }
+
+  th {
+    background: #eff6ff;
+  }
+
+  .tabla-input {
+    max-width: 160px;
+    margin: auto;
+  }
+
+  /* FORMULA */
+
+  .formula-ayuda {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background: #fefce8;
+  }
+
+  .formula-ayuda span {
+    font-weight: 700;
+  }
+
+  .formula-ayuda p {
+    margin-bottom: 0;
+  }
+
+  .funcion-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: #eff6ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .funcion-box input {
+    width: 150px;
+    text-align: center;
+  }
+
+  .pista {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.75;
+  }
+
+  /* GEOGEBRA */
+
+  .geogebra-card {
+    overflow: hidden;
+  }
+
+  .instrucciones {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background: #f0fdf4;
+  }
+
+  .instrucciones h3 {
+    margin-top: 0;
+  }
+
+  .instrucciones li {
+    margin-bottom: 0.4rem;
+  }
+
+ .geogebra-container {
+  width: 120%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+
+
+  .geogebra-nota {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #f8fafc;
+  }
+
+  /* FEEDBACK */
+
+  .feedback {
+    min-height: 1.4rem;
+    margin: 0.6rem 0;
+    font-weight: 600;
+  }
+
+  .feedback.correcto {
+    color: #15803d;
+  }
+
+  .feedback.error {
+    color: #dc2626;
+  }
+
+  /* BOTONES */
+
+  .btn {
+    padding: 0.75rem 1.2rem;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    background: #2563eb;
+    color: white;
+  }
+
+  .btn-success {
+    background: #16a34a;
+    color: white;
+  }
+
+  .btn-secondary {
+    background: #475569;
+    color: white;
+  }
+
+  /* RESULTADO */
+
+  .resultado {
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid #22c55e;
+    border-radius: 16px;
+    background: #f0fdf4;
+  }
+
+  .resultado-icono {
+    font-size: 3rem;
+  }
+
+  .resultado h2 {
+    margin: 0.5rem 0;
+  }
+
+  .puntaje {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    background: white;
+  }
+
+  .puntaje strong {
+    font-size: 2rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .input-prefix,
+  .input-sufix {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+  }
+
+  .input-prefix span,
+  .input-sufix span {
+    padding: 0.75rem;
+    background: #e5e7eb;
+  }
+
+  .input-prefix input,
+  .input-sufix input {
+    flex: 1;
+  }
+
+  @media (max-width: 600px) {
+    .datos {
+      grid-template-columns: 1fr;
+    }
+
+    .funcion-box {
+      flex-wrap: wrap;
+      font-size: 1rem;
+    }
+
+    .funcion-box input {
+      width: 110px;
+    }
+
+    .card {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+  let puntaje = 0;
+  let paso1Completado = false;
+  let tablaCompletada = false;
+  let funcionCompletada = false;
+  let analisisCompletado = false;
+
+  const respuestasTabla = [
+    15000,
+    25000,
+    35000,
+    45000,
+    55000,
+    65000
+  ];
+
+  function actualizarProgreso() {
+    let completados = 0;
+
+    if (paso1Completado) completados++;
+    if (tablaCompletada) completados++;
+    if (funcionCompletada) completados++;
+    if (document.querySelector(".geogebra-card")) completados++;
+    if (analisisCompletado) completados++;
+
+    const porcentaje = (completados / 5) * 100;
+
+    const barra = document.getElementById("barraProgreso");
+    const texto = document.getElementById("progresoTexto");
+
+    if (barra) barra.style.width = `${porcentaje}%`;
+    if (texto) texto.textContent = `${completados} / 5`;
+  }
+
+  function mostrarFeedback(
+    id: string,
+    mensaje: string,
+    correcto: boolean
+  ) {
+    const elemento = document.getElementById(id);
+
+    if (!elemento) return;
+
+    elemento.textContent = mensaje;
+    elemento.className = `feedback ${
+      correcto ? "correcto" : "error"
+    }`;
+  }
+
+  // PASO 1
+  document.getElementById("btnPaso1")?.addEventListener("click", () => {
+    const independiente = (
+      document.getElementById(
+        "variableIndependiente"
+      ) as HTMLSelectElement
+    ).value;
+
+    const dependiente = (
+      document.getElementById(
+        "variableDependiente"
+      ) as HTMLSelectElement
+    ).value;
+
+    let aciertos = 0;
+
+    if (independiente === "gb") {
+      mostrarFeedback(
+        "feedback1",
+        "✅ Correcto. La cantidad de GB es la variable independiente.",
+        true
+      );
+      aciertos++;
+    } else {
+      mostrarFeedback(
+        "feedback1",
+        "❌ Recuerda: la cantidad de GB es la variable que podemos modificar.",
+        false
+      );
+    }
+
+    if (dependiente === "costo") {
+      mostrarFeedback(
+        "feedback2",
+        "✅ Correcto. El costo depende de los GB consumidos.",
+        true
+      );
+      aciertos++;
+    } else {
+      mostrarFeedback(
+        "feedback2",
+        "❌ El costo cambia según la cantidad de GB consumidos.",
+        false
+      );
+    }
+
+    if (aciertos === 2 && !paso1Completado) {
+      puntaje += 2;
+      paso1Completado = true;
+    }
+
+    actualizarProgreso();
+  });
+
+  // TABLA
+  document.getElementById("btnTabla")?.addEventListener("click", () => {
+    let correctos = 0;
+
+    respuestasTabla.forEach((respuesta, index) => {
+      const input = document.getElementById(
+        `tabla${index}`
+      ) as HTMLInputElement;
+
+      const valor = Number(input?.value);
+
+      if (valor === respuesta) {
+        correctos++;
+        input.style.borderColor = "#16a34a";
+      } else {
+        input.style.borderColor = "#dc2626";
+      }
+    });
+
+    if (correctos === respuestasTabla.length) {
+      mostrarFeedback(
+        "feedbackTabla",
+        "🎉 ¡Excelente! La tabla está completamente correcta.",
+        true
+      );
+
+      if (!tablaCompletada) {
+        puntaje += 2;
+        tablaCompletada = true;
+      }
+    } else {
+      mostrarFeedback(
+        "feedbackTabla",
+        `Has acertado ${correctos} de ${respuestasTabla.length}. Revisa los valores marcados en rojo.`,
+        false
+      );
+    }
+
+    actualizarProgreso();
+  });
+
+  // FUNCIÓN
+  document.getElementById("btnFuncion")?.addEventListener("click", () => {
+    const coeficiente = (
+      document.getElementById("coeficiente") as HTMLInputElement
+    ).value.trim();
+
+    const termino = (
+      document.getElementById(
+        "terminoIndependiente"
+      ) as HTMLInputElement
+    ).value.trim();
+
+    if (coeficiente === "10000" && termino === "15000") {
+      mostrarFeedback(
+        "feedbackFuncion",
+        "🎉 ¡Correcto! La función es C(x) = 10.000x + 15.000.",
+        true
+      );
+
+      if (!funcionCompletada) {
+        puntaje += 2;
+        funcionCompletada = true;
+      }
+    } else {
+      mostrarFeedback(
+        "feedbackFuncion",
+        "❌ Revisa la tabla. El costo aumenta $10.000 por cada GB y existe un costo fijo de $15.000.",
+        false
+      );
+    }
+
+    actualizarProgreso();
+  });
+
+  // ANÁLISIS
+  document.getElementById("btnFinalizar")?.addEventListener("click", () => {
+    const a1 = (
+      document.getElementById("analisis1") as HTMLSelectElement
+    ).value;
+
+    const a2 = (
+      document.getElementById("analisis2") as HTMLSelectElement
+    ).value;
+
+    const a3 = Number(
+      (document.getElementById("analisis3") as HTMLInputElement).value
+    );
+
+    const a4 = Number(
+      (document.getElementById("analisis4") as HTMLInputElement).value
+    );
+
+    const a5 = (
+      document.getElementById("analisis5") as HTMLSelectElement
+    ).value;
+
+    let aciertos = 0;
+
+    if (a1 === "fijo") aciertos++;
+    if (a2 === "gb") aciertos++;
+    if (a3 === 85000) aciertos++;
+    if (a4 === 6) aciertos++;
+    if (a5 === "aumenta") aciertos++;
+
+    if (aciertos === 5) {
+      analisisCompletado = true;
+
+      if (!analisisCompletado) {
+        puntaje += 2;
+      }
+
+      // Se otorgan 2 puntos por completar correctamente el análisis.
+      // Evitamos duplicar puntos usando una variable independiente.
+      mostrarFeedback(
+        "feedbackAnalisis",
+        "🎉 ¡Excelente! Has interpretado correctamente la función y su gráfica.",
+        true
+      );
+    } else {
+      mostrarFeedback(
+        "feedbackAnalisis",
+        `Has respondido correctamente ${aciertos} de 5 preguntas. Revisa nuevamente la gráfica y tus cálculos.`,
+        false
+      );
+
+      return;
+    }
+
+    actualizarProgreso();
+
+    const resultado = document.getElementById("resultado");
+
+    if (resultado) {
+      resultado.classList.remove("hidden");
+
+      /*
+       * La actividad tiene 10 puntos:
+       * Paso 1 = 2
+       * Tabla = 2
+       * Función = 2
+       * GeoGebra = 2
+       * Análisis = 2
+       *
+       * La interacción con GeoGebra forma parte del proceso
+       * y se considera completada al llegar a esta etapa.
+       */
+
+      const puntajeTotal = Math.min(puntaje + 2, 10);
+
+      const puntajeFinal = document.getElementById("puntajeFinal");
+
+      if (puntajeFinal) {
+        puntajeFinal.textContent = `${puntajeTotal} / 10`;
+      }
+
+      const mensaje = document.getElementById("mensajeFinal");
+
+      if (mensaje) {
+        if (puntajeTotal === 10) {
+          mensaje.textContent =
+            "🏆 ¡Excelente trabajo! Dominas la relación entre la situación cotidiana, la expresión algebraica y la representación gráfica.";
+        } else if (puntajeTotal >= 7) {
+          mensaje.textContent =
+            "👍 ¡Buen trabajo! Has comprendido los elementos principales de la función lineal.";
+        } else {
+          mensaje.textContent =
+            "💪 Sigue practicando. Revisa especialmente la relación entre la tabla, la función y la gráfica.";
+        }
+      }
+
+      resultado.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  });
+
+  // REINICIAR
+  document.getElementById("btnReiniciar")?.addEventListener("click", () => {
+    window.location.reload();
+  });
+
+  actualizarProgreso();
+</script>

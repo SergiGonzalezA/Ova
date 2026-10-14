@@ -34,24 +34,24 @@ export default defineConfig({
               label: 'Unidad II: Función lineal',
               collapsed: true,
               items: [
-                { label: 'Sesión IV', slug: 'unidad/unidad-2/sesion-3' },
-                { label: 'Sesión V', slug: 'unidad/unidad-2/sesion-4' },
+                { label: 'Sesión III', slug: 'unidad/unidad-2/sesion-3' },
+                { label: 'Sesión IV', slug: 'unidad/unidad-2/sesion-4' },
               ],
             },
             {
               label: 'Unidad III: Función cuadratica',
               collapsed: true,
               items: [
-                { label: 'Sesión IV', slug: 'unidad/unidad-3/sesion-5' },
-                { label: 'Sesión V', slug: 'unidad/unidad-3/sesion-6' },
+                { label: 'Sesión V', slug: 'unidad/unidad-3/sesion-5' },
+                { label: 'Sesión VI', slug: 'unidad/unidad-3/sesion-6' },
               ],
             },
             {
               label: 'Unidad IV: Función cierre',
               collapsed: true,
               items: [
-                { label: 'Sesión IV', slug: 'unidad/unidad-4/sesion-7' },
-                { label: 'Sesión V', slug: 'unidad/unidad-4/sesion-8' },
+                { label: 'Sesión VII', slug: 'unidad/unidad-4/sesion-7' },
+                { label: 'Sesión VIII', slug: 'unidad/unidad-4/sesion-8' },
               ],
             },
           ],

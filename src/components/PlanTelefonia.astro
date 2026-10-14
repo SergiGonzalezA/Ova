@@ -1,0 +1,302 @@
+---
+---
+
+<div class="plan-card">
+
+  <div class="plan-header">
+    <div class="icono">📱</div>
+
+    <div>
+      <span class="etiqueta">PLAN PREPAGO</span>
+      <h3>Conecta+ </h3>
+    </div>
+  </div>
+
+
+  <div class="plan-info">
+
+    <div class="dato">
+      <span class="dato-label">Cargo fijo mensual</span>
+      <strong>$15.000</strong>
+    </div>
+
+    <div class="separador">+</div>
+
+    <div class="dato">
+      <span class="dato-label">Cada minuto adicional</span>
+      <strong>$250</strong>
+    </div>
+
+  </div>
+
+
+  <div class="exploracion">
+
+    <label for="minutos">
+      Minutos adicionales:
+      <strong id="valorMinutos">0</strong>
+    </label>
+
+    <input
+      id="minutos"
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+    />
+
+    <div class="rango">
+      <span>0 min</span>
+      <span>100 min</span>
+    </div>
+
+  </div>
+
+
+  <div class="resultado">
+
+    <span>Costo actual</span>
+
+    <strong id="costo">
+      $15.000
+    </strong>
+
+  </div>
+
+</div>
+
+
+<script>
+  const minutos =
+    document.getElementById("minutos") as HTMLInputElement;
+
+  const valorMinutos =
+    document.getElementById("valorMinutos");
+
+  const costo =
+    document.getElementById("costo");
+
+
+  minutos.addEventListener("input", () => {
+
+    const cantidad =
+      Number(minutos.value);
+
+    const total =
+      15000 + cantidad * 250;
+
+
+    if (valorMinutos) {
+      valorMinutos.textContent =
+        String(cantidad);
+    }
+
+
+    if (costo) {
+      costo.textContent =
+        `$${total.toLocaleString("es-CO")}`;
+    }
+
+  });
+</script>
+
+
+<style>
+
+.plan-card {
+  max-width: 650px;
+  margin: 2rem auto;
+
+  padding: 2rem;
+
+  border-radius: 20px;
+
+  background: var(--sl-color-bg-nav);
+
+  border: 1px solid var(--sl-color-gray-5);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ENCABEZADO */
+
+.plan-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+
+.icono {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  font-size: 1.7rem;
+
+  background: var(--sl-color-accent-low);
+}
+
+
+.etiqueta {
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  opacity: 0.7;
+}
+
+
+.plan-header h3 {
+  margin: 0.2rem 0 0;
+
+  font-size: 1.5rem;
+}
+
+
+/* DATOS DEL PLAN */
+
+.plan-info {
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  padding: 1.5rem;
+
+  border-radius: 14px;
+
+  background: var(--sl-color-gray-6);
+}
+
+
+.dato {
+  text-align: center;
+}
+
+
+.dato-label {
+  display: block;
+
+  font-size: 0.85rem;
+
+  margin-bottom: 0.5rem;
+
+  opacity: 0.7;
+}
+
+
+.dato strong {
+  font-size: 1.5rem;
+}
+
+
+.separador {
+  font-size: 1.5rem;
+
+  opacity: 0.5;
+}
+
+
+/* EXPLORACIÓN */
+
+.exploracion {
+  margin-top: 2rem;
+}
+
+
+.exploracion label {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+}
+
+
+#minutos {
+  width: 100%;
+
+  cursor: pointer;
+}
+
+
+.rango {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 0.4rem;
+
+  font-size: 0.8rem;
+
+  opacity: 0.6;
+}
+
+
+/* RESULTADO */
+
+.resultado {
+
+  margin-top: 2rem;
+
+  padding: 1.5rem;
+
+  border-radius: 14px;
+
+  text-align: center;
+
+  background: var(--sl-color-accent-low);
+}
+
+
+.resultado span {
+  display: block;
+
+  font-size: 0.9rem;
+
+  margin-bottom: 0.4rem;
+}
+
+
+.resultado strong {
+  font-size: 2rem;
+}
+
+
+/* MÓVIL */
+
+@media (max-width: 600px) {
+
+  .plan-card {
+    padding: 1.2rem;
+  }
+
+
+  .plan-info {
+    grid-template-columns: 1fr;
+
+    gap: 0.8rem;
+  }
+
+
+  .separador {
+    display: none;
+  }
+
+}
+
+</style>
