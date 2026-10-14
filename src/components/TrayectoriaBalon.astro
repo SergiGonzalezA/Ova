@@ -1,0 +1,175 @@
+---
+// Componente interactivo: trayectoria de un balón con GeoGebra.
+// Modelo: f(x) = -a·x² + b·x  (parábola que abre hacia abajo, parte del origen)
+// Arco ubicado a 20 m, altura del travesaño 2,44 m.
+---
+
+<div class="ggb-wrap">
+  <div id="ggb-balon" class="ggb-applet" aria-label="Simulación GeoGebra de la trayectoria de un balón"></div>
+
+  <div class="controles">
+    <label>
+      Parámetro a (curvatura): <output id="out-a">0.05</output>
+      <input id="in-a" type="range" min="0.02" max="0.20" step="0.005" value="0.05" />
+    </label>
+    <label>
+      Parámetro b (impulso inicial): <output id="out-b">1.00</output>
+      <input id="in-b" type="range" min="0.4" max="3" step="0.05" value="1" />
+    </label>
+    <div class="botones">
+      <button id="btn-lanzar" type="button">▶ Lanzar balón</button>
+      <button id="btn-reiniciar" type="button" class="secundario">↺ Reiniciar</button>
+    </div>
+  </div>
+
+  <ul class="lecturas" aria-live="polite">
+    <li>Alcance horizontal: <strong id="lec-alcance">–</strong> m</li>
+    <li>Altura máxima: <strong id="lec-altura">–</strong> m</li>
+    <li>Resultado: <strong id="lec-resultado">–</strong></li>
+  </ul>
+</div>
+
+<script is:inline src="https://www.geogebra.org/apps/deployggb.js"></script>
+<script is:inline>
+  (function () {
+    var api = null;
+    var anim = null;
+    var ARCO_X = 20;
+    var ARCO_ALTO = 2.44;
+
+    var inA = document.getElementById("in-a");
+    var inB = document.getElementById("in-b");
+
+    function valores() {
+      return { a: parseFloat(inA.value), b: parseFloat(inB.value) };
+    }
+
+    function f(x, v) {
+      return -v.a * x * x + v.b * x;
+    }
+
+    function actualizarLecturas() {
+      var v = valores();
+      var alcance = v.b / v.a;
+      var altura = (v.b * v.b) / (4 * v.a);
+      document.getElementById("out-a").textContent = v.a.toFixed(3);
+      document.getElementById("out-b").textContent = v.b.toFixed(2);
+      document.getElementById("lec-alcance").textContent = alcance.toFixed(1);
+      document.getElementById("lec-altura").textContent = altura.toFixed(1);
+
+      var yArco = f(ARCO_X, v);
+      var msg;
+      if (yArco < 0) msg = "El balón cae antes de llegar al arco";
+      else if (yArco > ARCO_ALTO) msg = "El balón pasa por encima del travesaño";
+      else msg = "¡Gol! Entra al arco";
+      document.getElementById("lec-resultado").textContent = msg;
+    }
+
+    function sincronizarGeoGebra() {
+      if (!api) return;
+      var v = valores();
+      api.setValue("a", v.a);
+      api.setValue("b", v.b);
+      api.setValue("t", 0);
+    }
+
+    function configurar() {
+      api.evalCommand("a = 0.05");
+      api.evalCommand("b = 1");
+      api.evalCommand("t = 0");
+      api.evalCommand("f(x) = -a*x^2 + b*x");
+      api.evalCommand("B = (t, f(t))");
+      api.evalCommand("V = (b/(2a), b^2/(4a))");
+      api.evalCommand("L = (b/a, 0)");
+      api.evalCommand("Arco = Segment((" + ARCO_X + ", 0), (" + ARCO_X + ", " + ARCO_ALTO + "))");
+
+      ["a", "b", "t"].forEach(function (n) { api.setVisible(n, false); });
+      api.setColor("f", 30, 90, 200);
+      api.setLineThickness("f", 5);
+      api.setColor("B", 230, 120, 0);
+      api.setPointSize("B", 9);
+      api.setColor("V", 200, 30, 30);
+      api.setCaption("V", "Vértice");
+      api.setLabelStyle("V", 3);
+      api.setLabelVisible("V", true);
+      api.setColor("L", 60, 60, 60);
+      api.setCaption("L", "Caída");
+      api.setLabelStyle("L", 3);
+      api.setLabelVisible("L", true);
+      api.setColor("Arco", 20, 140, 60);
+      api.setLineThickness("Arco", 9);
+      api.setCaption("Arco", "Arco");
+      api.setLabelStyle("Arco", 3);
+      api.setLabelVisible("Arco", true);
+      api.setCoordSystem(-2, 30, -2, 12);
+
+      sincronizarGeoGebra();
+      actualizarLecturas();
+    }
+
+    function detener() {
+      if (anim) cancelAnimationFrame(anim);
+      anim = null;
+    }
+
+    function lanzar() {
+      if (!api) return;
+      detener();
+      var v = valores();
+      var alcance = v.b / v.a;
+      var t = 0;
+      var paso = alcance / 120;
+      function frame() {
+        t += paso;
+        if (t >= alcance) { t = alcance; }
+        api.setValue("t", t);
+        if (t < alcance) anim = requestAnimationFrame(frame);
+        else anim = null;
+      }
+      anim = requestAnimationFrame(frame);
+    }
+
+    function reiniciar() {
+      detener();
+      if (api) api.setValue("t", 0);
+    }
+
+    [inA, inB].forEach(function (el) {
+      el.addEventListener("input", function () {
+        detener();
+        sincronizarGeoGebra();
+        actualizarLecturas();
+      });
+    });
+    document.getElementById("btn-lanzar").addEventListener("click", lanzar);
+    document.getElementById("btn-reiniciar").addEventListener("click", reiniciar);
+
+    var params = {
+      appName: "graphing",
+      width: 760,
+      height: 440,
+      showToolBar: false,
+      showAlgebraInput: false,
+      showMenuBar: false,
+      enableRightClick: false,
+      enableShiftDragZoom: false,
+      showResetIcon: false,
+      scaleContainerClass: "ggb-wrap",
+      allowUpscale: false,
+      appletOnLoad: function (a) { api = a; configurar(); }
+    };
+    var applet = new GGBApplet(params, true);
+    window.addEventListener("load", function () { applet.inject("ggb-balon"); });
+  })();
+</script>
+
+<style>
+  .ggb-wrap { max-width: 780px; margin: 1rem auto; }
+  .ggb-applet { min-height: 440px; border: 1px solid #d0d7de; border-radius: 8px; overflow: hidden; }
+  .controles { display: grid; gap: .75rem; margin-top: 1rem; }
+  .controles label { display: grid; gap: .25rem; font-weight: 600; }
+  .botones { display: flex; gap: .5rem; flex-wrap: wrap; }
+  button { padding: .55rem 1rem; border: 0; border-radius: 6px; background: #1e5ac8; color: #fff; font-weight: 600; cursor: pointer; }
+  button.secundario { background: #57606a; }
+  .lecturas { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .25rem; }
+</style>

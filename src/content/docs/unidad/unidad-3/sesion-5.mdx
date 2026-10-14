@@ -1,18 +1,58 @@
 ---
-title: Sesion 5
-description: Descripción breve de esta secuencia
+title: Sesión 5 · ¿Por qué una pelota no viaja en línea recta?
+description: Situación problema sobre la trayectoria de un balón para reconocer la parábola y las funciones cuadráticas.
 ---
 
 import GeoGebraApplet from '../../../../components/GeoGebraApplet.astro';
 
-Aquí va el contenido de tu primera secuencia didáctica.
+## Situación problema
 
-## Objetivo
+Es la final del campeonato escolar y quedan pocos segundos. Un jugador patea el balón desde el suelo hacia el arco. Al verlo, notas que el balón no viaja en línea recta: sube, alcanza un punto máximo y luego baja.
 
-Escribe aquí el objetivo de aprendizaje.
+Datos de la situación:
 
-## Desarrollo
+- El arco está a **20 m** del punto donde patea el jugador.
+- El travesaño está a **2,44 m** de altura.
+- El lanzamiento depende de dos parámetros: **a**, que controla qué tan curvada es la trayectoria, y **b**, que representa el impulso inicial de la patada.
 
-Escribe aquí las actividades o explicación.
+> **Pregunta problema:** ¿qué forma tiene la trayectoria del balón y cómo podemos representarla matemáticamente para predecir si entrará al arco?
 
-<GeoGebraApplet materialId="g8dpfg6y" />
+**Tu misión:** pulsa **▶ Lanzar balón** para ver el tiro. Luego mueve los deslizadores **a** y **b**, uno a la vez, y busca una combinación con la que el balón pase por debajo del travesaño y marque gol. Observa cómo cambian la curva, el punto más alto (vértice) y el lugar donde cae el balón.
+
+<GeoGebraApplet materialId="dhmr3rsw" />
+
+## Análisis
+
+Responde en tu cuaderno o en el espacio que indique tu docente. Luego socializa tus respuestas con el grupo.
+
+1. ¿Qué forma describe la trayectoria del balón? ¿Es una línea recta? ¿Por qué crees que ocurre?
+2. ¿Qué variables intervienen en la situación? ¿Qué representa cada eje (x e y)?
+3. ¿Cuál es el punto más alto que alcanza el balón? ¿Qué pasa con la altura antes y después de ese punto?
+4. Mueve los deslizadores a y b, uno a la vez. ¿Qué cambia en la trayectoria? ¿Cómo logras que el balón entre al arco?
+5. ¿Cómo podrías representar matemáticamente este comportamiento? Escribe una hipótesis.
+
+<details>
+<summary>Pistas</summary>
+
+- Pregunta 1: mira la curva azul mientras animas el balón.
+- Pregunta 2: piensa en la distancia recorrida y en la altura.
+- Pregunta 3: ubica el punto rojo (vértice).
+- Pregunta 5: la expresión del modelo aparece en la vista algebraica de GeoGebra.
+
+</details>
+
+## Conceptualización
+
+La trayectoria que observaste es una **parábola**, la gráfica de una **función cuadrática**. Su forma general es:
+
+**f(x) = ax² + bx + c**, con a distinto de 0.
+
+| Elemento | ¿Qué es? | En el balón |
+| --- | --- | --- |
+| Parábola | Curva simétrica que abre hacia arriba o hacia abajo | La trayectoria completa |
+| Vértice | Punto más alto o más bajo de la curva | La altura máxima |
+| Concavidad | Si a es positivo abre hacia arriba; si es negativo, hacia abajo | Abre hacia abajo |
+| Eje de simetría | Recta vertical que pasa por el vértice | Divide el vuelo en subida y bajada |
+| Interceptos | Puntos donde la gráfica corta los ejes | El lugar donde el balón cae |
+
+En esta situación el modelo es **f(x) = −a·x² + b·x**: el coeficiente **a** controla la curvatura y **b** el impulso inicial. En la siguiente actividad profundizarás en cada elemento.

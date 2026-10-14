@@ -1,0 +1,145 @@
+---
+import TrayectoriaBalon from "../components/TrayectoriaBalon.astro";
+
+const preguntasAnalisis = [
+  {
+    id: "q1",
+    texto: "¿Qué forma describe la trayectoria del balón? ¿Es una línea recta? ¿Por qué crees que ocurre?",
+    pista: "Observa la curva azul en GeoGebra mientras lanzas el balón.",
+  },
+  {
+    id: "q2",
+    texto: "¿Qué variables intervienen en la situación? Identifica qué representa cada eje (x e y).",
+    pista: "Piensa en la distancia recorrida y la altura del balón.",
+  },
+  {
+    id: "q3",
+    texto: "¿Cuál es el punto más alto que alcanza el balón? ¿Qué pasa con la altura antes y después de ese punto?",
+    pista: "Ubica el punto rojo (vértice) y mira cómo cambian los valores.",
+  },
+  {
+    id: "q4",
+    texto: "Mueve los deslizadores a y b. ¿Qué cambia en la trayectoria? ¿Cómo logras que el balón entre al arco?",
+    pista: "Prueba cambiar un parámetro a la vez.",
+  },
+  {
+    id: "q5",
+    texto: "¿Cómo podrías representar matemáticamente este comportamiento? Escribe una hipótesis.",
+    pista: "Piensa en una expresión con x² (revisa la cámara de GeoGebra: f(x) = -a·x² + b·x).",
+  },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unidad 3 · Situación problema</title>
+    <style>
+      :root { --azul: #1e5ac8; --gris: #57606a; }
+      body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; color: #1f2328; }
+      header, main { max-width: 860px; margin: 0 auto; padding: 1rem 1.25rem; }
+      header { border-bottom: 3px solid var(--azul); }
+      h1 { margin: 0; font-size: 1.7rem; }
+      .meta { color: var(--gris); font-size: .9rem; }
+      section { margin: 2rem 0; }
+      section > h2 { color: var(--azul); border-left: 5px solid var(--azul); padding-left: .6rem; }
+      .pregunta-problema { background: #eef4ff; border-radius: 10px; padding: 1rem 1.25rem; font-size: 1.15rem; font-weight: 600; }
+      .pregunta { margin: 1.25rem 0; }
+      textarea { width: 100%; min-height: 70px; padding: .5rem; border: 1px solid #d0d7de; border-radius: 6px; font: inherit; box-sizing: border-box; }
+      details { color: var(--gris); margin: .25rem 0; }
+      .tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+      .tarjeta { border: 1px solid #d0d7de; border-radius: 8px; padding: .75rem 1rem; }
+      .formula { text-align: center; font-size: 1.5rem; background: #f6f8fa; padding: .75rem; border-radius: 8px; }
+      button { padding: .55rem 1rem; border: 0; border-radius: 6px; background: var(--azul); color: #fff; font-weight: 600; cursor: pointer; }
+      .siguiente { display: inline-block; margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>¿Por qué una pelota no viaja en línea recta?</h1>
+      <p class="meta">Unidad didáctica III · Actividad 3.1 · Situación problema · 25 min</p>
+    </header>
+
+    <main>
+      <!-- 1. PREGUNTA PROBLEMA + ACTIVIDAD INTERACTIVA -->
+      <section id="situacion">
+        <h2>1. Situación problema</h2>
+        <p class="pregunta-problema">
+          Un jugador patea un balón hacia el arco. ¿Qué trayectoria describe el balón y
+          cómo podemos representarla matemáticamente para saber si anotará gol?
+        </p>
+        <p>
+          Lanza el balón con el botón y mueve los deslizadores. Observa cómo cambia la
+          curva, el punto más alto y el lugar donde cae.
+        </p>
+        <TrayectoriaBalon />
+      </section>
+
+      <!-- 2. ANÁLISIS -->
+      <section id="analisis">
+        <h2>2. Análisis de la situación</h2>
+        <p>Responde cada pregunta con tus palabras. Tus respuestas se guardan en este navegador y las compartirás con el grupo.</p>
+
+        {preguntasAnalisis.map((p, i) => (
+          <div class="pregunta">
+            <label for={p.id}><strong>{i + 1}.</strong> {p.texto}</label>
+            <details><summary>Ver pista</summary>{p.pista}</details>
+            <textarea id={p.id} data-guardar placeholder="Escribe aquí tu respuesta…"></textarea>
+          </div>
+        ))}
+
+        <button id="btn-copiar" type="button">Copiar mis respuestas</button>
+        <span id="msg-copiar" aria-live="polite"></span>
+      </section>
+
+      <!-- 3. CONCEPTUALIZACIÓN -->
+      <section id="conceptualizacion">
+        <h2>3. Conceptualización</h2>
+        <p>
+          La trayectoria que observaste es una <strong>parábola</strong>, la gráfica de una
+          <strong>función cuadrática</strong>, cuya forma general es:
+        </p>
+        <p class="formula">f(x) = ax² + bx + c, con a ≠ 0</p>
+
+        <div class="tarjetas">
+          <div class="tarjeta"><h3>Parábola</h3><p>Curva simétrica que abre hacia arriba o hacia abajo.</p></div>
+          <div class="tarjeta"><h3>Vértice</h3><p>Punto más alto o más bajo. En el balón, la altura máxima.</p></div>
+          <div class="tarjeta"><h3>Concavidad</h3><p>Depende del signo de a: si a &lt; 0 abre hacia abajo, si a &gt; 0 hacia arriba.</p></div>
+          <div class="tarjeta"><h3>Eje de simetría</h3><p>Recta vertical que pasa por el vértice y divide la parábola en dos partes iguales.</p></div>
+          <div class="tarjeta"><h3>Interceptos</h3><p>Puntos donde la gráfica corta los ejes: el lugar donde el balón cae es un intercepto con el eje x.</p></div>
+        </div>
+
+        <p>
+          En esta situación el modelo fue f(x) = −a·x² + b·x: el coeficiente <em>a</em> controla
+          la curvatura y <em>b</em> el impulso inicial. En la siguiente actividad profundizarás
+          en estos elementos.
+        </p>
+        <a class="siguiente" href="/unidad-3/conceptualizacion"><button type="button">Continuar a 3.2 →</button></a>
+      </section>
+    </main>
+
+    <script is:inline>
+      (function () {
+        var campos = document.querySelectorAll("[data-guardar]");
+        campos.forEach(function (c) {
+          try { c.value = localStorage.getItem("u3-" + c.id) || ""; } catch (e) {}
+          c.addEventListener("input", function () {
+            try { localStorage.setItem("u3-" + c.id, c.value); } catch (e) {}
+          });
+        });
+        document.getElementById("btn-copiar").addEventListener("click", function () {
+          var texto = Array.prototype.map.call(campos, function (c, i) {
+            return (i + 1) + ". " + c.value;
+          }).join("\n\n");
+          var msg = document.getElementById("msg-copiar");
+          navigator.clipboard.writeText(texto).then(
+            function () { msg.textContent = " Copiado ✔"; },
+            function () { msg.textContent = " No se pudo copiar"; }
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>
