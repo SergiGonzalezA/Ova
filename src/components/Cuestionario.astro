@@ -1,0 +1,133 @@
+---
+// Cuestionario de selección múltiple con retroalimentación inmediata.
+// Uso en MDX: <Cuestionario preguntas={preguntas} />
+interface Pregunta {
+  enunciado: string;
+  opciones: string[];
+  correcta: number; // índice (desde 0) de la opción correcta
+  explicacion: string; // se muestra al acertar
+  pista?: string; // se muestra al fallar
+}
+interface Props {
+  titulo?: string;
+  preguntas: Pregunta[];
+}
+const { titulo = "Cuestionario de retroalimentación", preguntas } = Astro.props;
+---
+
+<section class="cuestionario">
+  <h3>{titulo}</h3>
+
+  {preguntas.map((p, i) => (
+    <fieldset
+      class="pregunta"
+      data-correcta={p.correcta}
+      data-explicacion={p.explicacion}
+      data-pista={p.pista ?? ""}
+    >
+      <legend>{i + 1}. {p.enunciado}</legend>
+      <div class="opciones">
+        {p.opciones.map((o, j) => (
+          <button type="button" class="opcion" data-indice={j}>{o}</button>
+        ))}
+      </div>
+      <p class="retro" hidden aria-live="polite"></p>
+    </fieldset>
+  ))}
+
+  <div class="resumen" hidden aria-live="polite">
+    <p class="resumen-texto"></p>
+    <button type="button" class="reiniciar">↺ Intentar de nuevo</button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".cuestionario").forEach((cuest) => {
+    const preguntas = Array.from(cuest.querySelectorAll<HTMLElement>(".pregunta"));
+    const resumen = cuest.querySelector<HTMLElement>(".resumen")!;
+    const resumenTexto = cuest.querySelector<HTMLElement>(".resumen-texto")!;
+    const estado = preguntas.map(() => ({ intentos: 0, resuelta: false, aPrimera: false }));
+
+    function mostrarResumen() {
+      const aciertos = estado.filter((e) => e.aPrimera).length;
+      const total = estado.length;
+      const ratio = aciertos / total;
+      let mensaje: string;
+      if (ratio >= 0.8) mensaje = "¡Excelente! Dominas las funciones cuadráticas en esta situación.";
+      else if (ratio >= 0.5) mensaje = "Vas bien. Repasa las preguntas donde necesitaste más de un intento.";
+      else mensaje = "Vuelve al applet, revisa el vértice, la concavidad y los interceptos, e inténtalo otra vez.";
+      resumenTexto.textContent = `Acertaste ${aciertos} de ${total} a la primera. ${mensaje}`;
+      resumen.hidden = false;
+    }
+
+    preguntas.forEach((preg, i) => {
+      const correcta = Number(preg.dataset.correcta);
+      const retro = preg.querySelector<HTMLElement>(".retro")!;
+
+      preg.querySelectorAll<HTMLButtonElement>(".opcion").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const st = estado[i];
+          if (st.resuelta) return;
+          st.intentos += 1;
+
+          if (Number(btn.dataset.indice) === correcta) {
+            st.resuelta = true;
+            st.aPrimera = st.intentos === 1;
+            btn.classList.add("correcta");
+            retro.className = "retro ok";
+            retro.textContent = "✔ ¡Correcto! " + (preg.dataset.explicacion ?? "");
+            preg.querySelectorAll<HTMLButtonElement>(".opcion").forEach((b) => (b.disabled = true));
+          } else {
+            btn.classList.add("incorrecta");
+            btn.disabled = true;
+            retro.className = "retro mal";
+            retro.textContent =
+              "✘ Aún no. " + (preg.dataset.pista || "Revisa tu gráfica en GeoGebra e inténtalo de nuevo.");
+          }
+          retro.hidden = false;
+
+          if (estado.every((e) => e.resuelta)) mostrarResumen();
+        });
+      });
+    });
+
+    cuest.querySelector<HTMLButtonElement>(".reiniciar")!.addEventListener("click", () => {
+      estado.forEach((e) => {
+        e.intentos = 0;
+        e.resuelta = false;
+        e.aPrimera = false;
+      });
+      preguntas.forEach((preg) => {
+        preg.querySelectorAll<HTMLButtonElement>(".opcion").forEach((b) => {
+          b.disabled = false;
+          b.classList.remove("correcta", "incorrecta");
+        });
+        const retro = preg.querySelector<HTMLElement>(".retro")!;
+        retro.hidden = true;
+        retro.textContent = "";
+      });
+      resumen.hidden = true;
+      cuest.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+</script>
+
+<style>
+  .cuestionario { max-width: 780px; margin: 2rem auto; }
+  .pregunta { border: 1px solid #d0d7de; border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  legend { font-weight: 600; padding: 0 .4rem; }
+  .opciones { display: grid; gap: .5rem; margin-top: .5rem; }
+  .opcion {
+    text-align: left; padding: .6rem .9rem; border: 1px solid #c6d2e6; border-radius: 8px;
+    background: #f6f9ff; cursor: pointer; font: inherit; color: inherit;
+  }
+  .opcion:hover:not(:disabled) { background: #e6efff; }
+  .opcion.correcta { background: #d9f5e1; border-color: #14a03c; }
+  .opcion.incorrecta { background: #fde4e4; border-color: #d62828; text-decoration: line-through; }
+  .opcion:disabled:not(.correcta):not(.incorrecta) { opacity: .55; cursor: default; }
+  .retro { margin: .75rem 0 0; padding: .6rem .8rem; border-radius: 8px; }
+  .retro.ok { background: #eafaf0; color: #0f6b2b; }
+  .retro.mal { background: #fff1f1; color: #9b1c1c; }
+  .resumen { margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: 10px; background: #eef4ff; }
+  .reiniciar { padding: .5rem 1rem; border: 0; border-radius: 6px; background: #1e5ac8; color: #fff; font-weight: 600; cursor: pointer; }
+</style>

@@ -4,15 +4,52 @@ description: Descripción breve de esta secuencia
 ---
 
 import GeoGebraApplet from '../../../../components/GeoGebraApplet.astro';
+import Cuestionario from '../../../../components/Cuestionario.astro';
+import preguntas from '../../../../data/cuestionario-conceptualizacion.json';
 
-Aquí va el contenido de tu primera secuencia didáctica.
+Recordemos lo aprendido en la sesión anterior
+- **Forma general:** f(x) = ax² + bx + c, con a distinto de 0.
+- **Concavidad:** si a es positivo abre hacia arriba; si es negativo, hacia abajo.
+- **Vértice:** punto más alto o más bajo. Su coordenada x es −b / 2a.
+- **Eje de simetría:** la recta vertical x = −b / 2a.
+- **Interceptos:** con el eje y es el punto (0, c); con el eje x dependen del discriminante D = b² − 4ac: dos puntos si D es positivo, uno si es cero y ninguno si es negativo.
 
-## Objetivo
+## Interactua con geo-gebra
 
-Escribe aquí el objetivo de aprendizaje.
+Usa los deslizadores **a**, **b** y **c** para modificar la función **f(x) = ax² + bx + c** y avanza con los botones **◀ Anterior** y **Siguiente ▶**. Cada actividad tiene un reto descrito a continuacón.
 
-## Desarrollo
+| Actividad | Qué descubres |
+| --- | --- |
+| 1. Forma general y concavidad | Cómo el signo de **a** decide si la parábola abre hacia arriba o hacia abajo |
+| 2. Vértice y eje de simetría | Dónde está el punto más alto o más bajo y cómo divide la parábola en dos partes iguales |
+| 3. Interceptos con los ejes | Cuántas veces corta la parábola al eje x y dónde corta al eje y |
+| 4. De la expresión a la gráfica | Cómo encontrar a, b y c a partir de las características de una parábola |
 
-Escribe aquí las actividades o explicación.
+<GeoGebraApplet materialId="v3p34buz" />
 
-<GeoGebraApplet materialId="g8dpfg6y" />
+## Actividades de aplicación
+
+Un puente de arco cruza un río. Los pilares (puntos naranja) están a 8 m. El arco debe nacer en un pilar, terminar en el otro y medir 4 m de altura en el centro.
+
+**Parte A:** Con los deslizadores a, b y c construye la parábola f(x) = ax² + bx + c.
+
+**Parte B:** Responde las dos preguntas con tu modelo y marca «Verificar mi respuesta».
+
+Evaluación · El arco del puente
+
+<GeoGebraApplet materialId="prn5rdtq" />
+
+
+## Cuestionario de refuerzo
+
+Ahora aplica lo que descubriste en el applet. Si fallas, recibirás una pista; al acertar verás la explicación.
+
+<Cuestionario titulo="Refuerza lo aprendido" preguntas={preguntas} />
+
+## Checklist de la actividad
+
+- [ ] Reconozco la estructura de una función cuadrática.
+- [ ] Identifico correctamente sus elementos.
+- [ ] Interpreto la relación entre la expresión algebraica y la gráfica.
+
+

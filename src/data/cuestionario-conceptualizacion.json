@@ -1,0 +1,57 @@
+[
+  {
+    "enunciado": "La trayectoria de la fuente se modeló con h(x) = -0,5x² + 2x + 2,5. ¿Qué forma tiene su gráfica y por qué?",
+    "opciones": [
+      "Una parábola que abre hacia arriba, porque c = 2,5 es positivo",
+      "Una parábola que abre hacia abajo, porque a = -0,5 es negativo",
+      "Una parábola que abre hacia arriba, porque b = 2 es positivo",
+      "Una recta que baja, porque el coeficiente a es negativo"
+    ],
+    "correcta": 1,
+    "explicacion": "La concavidad depende solo del signo de a. Como a = -0,5 es negativo, la parábola abre hacia abajo (forma ∩), igual que el chorro de la fuente.",
+    "pista": "Recuerda la actividad 1: ¿qué coeficiente decidía si la curva era ∪ o ∩?"
+  },
+  {
+    "enunciado": "Se comparan y = 3x² y y = 0,5x². ¿Cuál de las dos parábolas es más cerrada?",
+    "opciones": [
+      "y = 0,5x², porque su coeficiente es menor",
+      "y = 3x², porque |a| es mayor",
+      "Las dos son iguales, porque ambas abren hacia arriba",
+      "No se puede saber sin conocer b y c"
+    ],
+    "correcta": 1,
+    "explicacion": "Cuanto mayor es |a|, más cerrada es la parábola. Con |a| = 3 la curva es más angosta que con |a| = 0,5, que es más abierta.",
+    "pista": "En el applet, al subir |a| la parábola se iba cerrando alrededor de su vértice."
+  },
+  {
+    "enunciado": "¿Cuál es el vértice de la parábola f(x) = -x² + 4x + 1?",
+    "opciones": ["(2, 5)", "(4, 1)", "(-2, -11)", "(2, 1)"],
+    "correcta": 0,
+    "explicacion": "La coordenada x del vértice es -b / 2a = -4 / (-2) = 2. Su altura es f(2) = -4 + 8 + 1 = 5. El vértice es (2, 5).",
+    "pista": "Primero halla x con -b / 2a. Luego reemplaza ese valor en la función para obtener la altura."
+  },
+  {
+    "enunciado": "La función f(x) = 2x² - 8x + 3 tiene su vértice en (2, -5). ¿Qué representa ese punto?",
+    "opciones": [
+      "El punto máximo de la gráfica, con valor -5",
+      "El punto mínimo de la gráfica, con valor -5",
+      "El punto mínimo de la gráfica, con valor 2",
+      "El punto donde la gráfica corta al eje y"
+    ],
+    "correcta": 1,
+    "explicacion": "Como a = 2 es positivo, la parábola abre hacia arriba y su vértice es el punto más bajo: un mínimo. El valor mínimo de la función es la altura del vértice, f(2) = -5.",
+    "pista": "Si a > 0, la curva abre hacia arriba. ¿El vértice sería el punto más alto o el más bajo?"
+  },
+  {
+    "enunciado": "El arco de un puente se modela con f(x) = -0,25x² + 2x, donde x es la distancia en metros desde el pilar izquierdo y f(x) es la altura. Su vértice es (4, 4). ¿Qué significa ese punto en el puente?",
+    "opciones": [
+      "El arco mide 4 m de altura en cualquier punto",
+      "El punto más bajo del arco está a 4 m del pilar izquierdo",
+      "El punto más alto del arco mide 4 m y está a 4 m del pilar izquierdo",
+      "El puente mide 4 m de largo"
+    ],
+    "correcta": 2,
+    "explicacion": "Como a = -0,25 es negativo, el vértice es un máximo. Es la altura máxima del arco (4 m), alcanzada a 4 m del pilar izquierdo, justo en el centro de los 8 m del puente.",
+    "pista": "Fíjate en el signo de a: ¿el vértice sería el punto más alto o el más bajo del arco?"
+  }
+]
